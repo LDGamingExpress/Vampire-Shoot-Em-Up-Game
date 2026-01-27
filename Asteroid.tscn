@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://blosenedch1cy"]
+
+[ext_resource type="Script" uid="uid://bdsv1ekkvwg5o" path="res://AsteroidScript.gd" id="1_n00aa"]
+[ext_resource type="Texture2D" uid="uid://crufu3yrf3i00" path="res://Textures/spaceshoootemupgamespritesheet.png" id="2_3jv40"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy88d"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7twjd"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq7qh"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jdc1"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aux7"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj5al"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk7de"]
+atlas = ExtResource("2_3jv40")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rl8i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy88d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7twjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq7qh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jdc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2aux7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj5al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk7de")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x5plk"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_edsn1"]
+radius = 16.0
+
+[node name="Asteroid" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_n00aa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3rl8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x5plk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_edsn1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

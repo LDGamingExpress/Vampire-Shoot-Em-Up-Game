@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtwueuvm8boon"]
+
+[ext_resource type="Texture2D" uid="uid://crufu3yrf3i00" path="res://Textures/spaceshoootemupgamespritesheet.png" id="1_h8b8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rubt1"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cocwo"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0lvc"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2752x"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ksp"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdm5v"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmyh3"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwmj1"]
+atlas = ExtResource("1_h8b8a")
+region = Rect2(288, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_no5u6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rubt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cocwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0lvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2752x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7ksp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdm5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmyh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwmj1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BackgroundObject" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_no5u6")
