@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://2u22ufxmclmj"
+path="res://.godot/imported/Emissary From Hell.mp3-a340ebd1be16dab34f65479c05e3ed80.mp3str"
+
+[deps]
+
+source_file="res://Music/Emissary From Hell.mp3"
+dest_files=["res://.godot/imported/Emissary From Hell.mp3-a340ebd1be16dab34f65479c05e3ed80.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

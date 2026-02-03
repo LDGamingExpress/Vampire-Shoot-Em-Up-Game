@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://diixndpgadthr"
+path="res://.godot/imported/Return Alive.mp3-b7b0d978d4753e58f86c65fdaa947595.mp3str"
+
+[deps]
+
+source_file="res://Music/Return Alive.mp3"
+dest_files=["res://.godot/imported/Return Alive.mp3-b7b0d978d4753e58f86c65fdaa947595.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

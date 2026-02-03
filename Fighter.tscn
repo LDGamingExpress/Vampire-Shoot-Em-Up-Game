@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://8o75fi0h74wf"]
+
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="1_lkiow"]
+[ext_resource type="Texture2D" uid="uid://bea8nkk8q2il1" path="res://Textures/FireParticle.png" id="2_ftobn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftobn"]
+atlas = ExtResource("1_lkiow")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftobn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftobn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_81dvp"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fisqk"]
+gradient = SubResource("Gradient_81dvp")
+
+[sub_resource type="Curve" id="Curve_o5eo8"]
+_data = [Vector2(0, 0.4044944), 0.0, 3.0651686, 0, 0, Vector2(1, 0), -0.30268312, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0nj7v"]
+curve = SubResource("Curve_o5eo8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nth4c"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(-1, 0, 0)
+spread = 7.222
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 5, 0)
+scale_curve = SubResource("CurveTexture_0nj7v")
+color_ramp = SubResource("GradientTexture1D_fisqk")
+
+[node name="Fighter" type="Node2D"]
+
+[node name="GunPoints" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="GunPoints"]
+position = Vector2(2, -8.5)
+
+[node name="Node2D2" type="Node2D" parent="GunPoints"]
+position = Vector2(2, 8.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_ftobn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(-13, 0)
+amount = 15
+texture = ExtResource("2_ftobn")
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_nth4c")

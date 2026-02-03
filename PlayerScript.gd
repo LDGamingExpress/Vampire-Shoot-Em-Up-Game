@@ -19,9 +19,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_pressed("Shoot") and CanShoot:
 		CanShoot = false
-		for i in range(0,$GunPoints.get_child_count()):
+		for i in range(0,$Fighter/GunPoints.get_child_count()):
 			var newBullet = BulletObj.instantiate()
-			newBullet.position = $GunPoints.get_child(i).global_position
+			newBullet.position = $Fighter/GunPoints.get_child(i).global_position
 			newBullet.Frame = 0
 			newBullet.rotation = rotation
 			newBullet.Team = "Player"

@@ -19,3 +19,4 @@ func _process(delta: float) -> void:
 		CurrentNode.position.y += Globals.PlayerSpeed*delta
 		if CurrentNode.position.y > Globals.ScreenSize.y/2:
 			CurrentNode.position.y = -Globals.ScreenSize.y/2
+			CurrentNode.position.x = randf_range(-Globals.ScreenSize.x/2.0,Globals.ScreenSize.x/2.0)

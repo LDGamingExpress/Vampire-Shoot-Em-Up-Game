@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cei6857nj0336"
+path="res://.godot/imported/On A Mission.mp3-df15baf58c275f5584d07b5938b2f50b.mp3str"
+
+[deps]
+
+source_file="res://Music/On A Mission.mp3"
+dest_files=["res://.godot/imported/On A Mission.mp3-df15baf58c275f5584d07b5938b2f50b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
