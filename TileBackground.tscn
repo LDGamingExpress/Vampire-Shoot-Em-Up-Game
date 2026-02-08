@@ -475,8 +475,6 @@ tile_set = SubResource("TileSet_ohgcf")
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_v5grv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="NightLayer" type="Polygon2D" parent="."]
 color = Color(0, 0, 0, 0.654902)
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
