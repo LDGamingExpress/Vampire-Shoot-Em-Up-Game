@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bbxq3x0p3dsgm"]
+
+[node name="GunPoint" type="Node2D"]
+rotation = -1.5707964

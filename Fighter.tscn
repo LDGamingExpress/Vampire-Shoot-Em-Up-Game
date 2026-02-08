@@ -49,9 +49,11 @@ color_ramp = SubResource("GradientTexture1D_fisqk")
 
 [node name="Node2D" type="Node2D" parent="GunPoints"]
 position = Vector2(2, -8.5)
+rotation = -1.5707964
 
 [node name="Node2D2" type="Node2D" parent="GunPoints"]
 position = Vector2(2, 8.5)
+rotation = -1.5707964
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1

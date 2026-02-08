@@ -7,6 +7,10 @@ var Stage = 0
 var Asteroid = load("res://Asteroid.tscn")
 var Bat = load("res://Bat.tscn")
 
+var powerUp = load("res://PowerUp.tscn")
+var time := 0.0
+var finishTime := 0.0
+
 func _ready() -> void:
 	await get_tree().create_timer(LevelStageEnemies[0][3]).timeout
 	EnemySpawner()
@@ -59,3 +63,14 @@ func SpawnBatR():
 	newObj.position = Vector2(randf_range(0,Globals.ScreenSize.x/2.0),-Globals.ScreenSize.y/2)
 	newObj.rotation = 3*PI/4
 	call_deferred("add_child",newObj)
+
+func _process(delta: float) -> void:
+	time += delta
+	
+	if time > finishTime:
+		var newObj = powerUp.instantiate()
+		newObj.position = Vector2(randf_range(-100, 100),-200)
+		call_deferred("add_child", newObj)
+		
+		time = 0.0
+		finishTime = randf_range(20.0, 40.0)

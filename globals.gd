@@ -6,3 +6,5 @@ var PlanetType = "Alive"
 # Alive, Dead, Mixed
 var Biome = "Continental"
 # Continental, Arctic, Desert
+
+var PowerUp : String = "None"
