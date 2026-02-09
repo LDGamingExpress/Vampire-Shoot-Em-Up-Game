@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b535hpfa6lx32"]
+[gd_scene load_steps=7 format=3 uid="uid://b535hpfa6lx32"]
 
 [ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="1_3tbxw"]
 [ext_resource type="Script" uid="uid://fi4kp64vcvqy" path="res://MainGameScript.gd" id="1_ws5ob"]
 [ext_resource type="Script" uid="uid://c3xso6t37phfm" path="res://DataSaves.gd" id="2_8qpgq"]
 [ext_resource type="Script" uid="uid://dywe8c8emboin" path="res://BackgroundObjectsScript.gd" id="2_e3m3f"]
 [ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="4_bqqt8"]
+[ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="6_pv6b4"]
 
-[node name="Node2D" type="Node2D"]
+[node name="MainGame" type="Node2D"]
 script = ExtResource("1_ws5ob")
 
 [node name="SaveSystem" type="Node2D" parent="."]
@@ -23,3 +24,5 @@ script = ExtResource("2_e3m3f")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GameUI" parent="CanvasLayer" instance=ExtResource("4_bqqt8")]
+
+[node name="TileBackground" parent="." instance=ExtResource("6_pv6b4")]

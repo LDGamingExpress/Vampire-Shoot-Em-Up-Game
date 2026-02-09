@@ -1,27 +1,28 @@
-[gd_scene load_steps=13 format=3 uid="uid://cm3uum7evccfj"]
+[gd_scene load_steps=13 format=3 uid="uid://k4l17unsekq6"]
 
-[ext_resource type="Script" uid="uid://bgb8pwu282s3k" path="res://BatScript.gd" id="1_r6jf1"]
-[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_87x83"]
+[ext_resource type="Script" uid="uid://dyymf0cqyk38t" path="res://FangFighterScript.gd" id="1_b5507"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_luidn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2woo"]
-atlas = ExtResource("2_87x83")
-region = Rect2(480, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtmkw"]
+atlas = ExtResource("2_luidn")
+region = Rect2(512, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_2unj5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jo42q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o2woo")
+"texture": SubResource("AtlasTexture_gtmkw")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r6jf1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_luidn"]
+radius = 13.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_87x83"]
-radius = 13.038404
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtmkw"]
+radius = 15.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r6jf1"]
 load_path = "res://.godot/imported/FireParticle.png-c6f477c14192667766c9fe5eb3333847.ctex"
@@ -51,29 +52,42 @@ gravity = Vector3(0, 5, 0)
 scale_curve = SubResource("CurveTexture_2epib")
 color_ramp = SubResource("GradientTexture1D_o2woo")
 
-[node name="Bat" type="CharacterBody2D"]
+[node name="FangFighter" type="CharacterBody2D"]
 collision_mask = 0
-script = ExtResource("1_r6jf1")
+script = ExtResource("1_b5507")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_2unj5")
+sprite_frames = SubResource("SpriteFrames_jo42q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_r6jf1")
+shape = SubResource("CircleShape2D_luidn")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_87x83")
+shape = SubResource("CircleShape2D_gtmkw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-self_modulate = Color(1, 0.14509805, 0, 1)
+self_modulate = Color(0.38074398, 0.017965917, 0, 1)
 z_index = 2
-position = Vector2(-8, -0.5)
+position = Vector2(-8, 0)
 emitting = false
 amount = 15
 texture = SubResource("CompressedTexture2D_r6jf1")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_d2utv")
 
+[node name="GunPoints" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="GunPoints"]
+position = Vector2(13, -8.5)
+
+[node name="Node2D2" type="Node2D" parent="GunPoints"]
+position = Vector2(13, 8.5)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

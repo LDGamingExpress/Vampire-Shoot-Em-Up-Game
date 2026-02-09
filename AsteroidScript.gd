@@ -2,7 +2,7 @@ extends CharacterBody2D
 var Team = "Enemy"
 # "Player", "Enemy", "Ally"
 var Damage = 1
-var Speed = Globals.PlayerSpeed + randi_range(-20,50) + 20
+var Speed = Globals.PlayerSpeed + randi_range(0,50) + 20
 var Frame = randi_range(0,6)
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
 var Health = 1
