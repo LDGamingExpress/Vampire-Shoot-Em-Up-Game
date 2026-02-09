@@ -25,6 +25,5 @@ func _process(delta: float) -> void:
 	time += delta
 	
 	if time > saveTime:
-		print("Save")
 		time = 0.0
 		SaveData()

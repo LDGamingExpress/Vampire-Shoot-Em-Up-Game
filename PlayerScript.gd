@@ -44,6 +44,7 @@ func Reload(time : float):
 	CanShoot = true
 
 func Damaged():
+	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBar").value = Health
 	if Health <= 0:
 		print("You Died!")
 

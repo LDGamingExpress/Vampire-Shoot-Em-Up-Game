@@ -1,8 +1,14 @@
 extends Control
 var score = 0
+var paused = false
 
 func _ready() -> void:
 	$ScorePanel/HighScore.text = "High Score: " + str(Globals.HighScore)
+	
+	$PauseMenu/QuitButton.pressed.connect(menu_button_click.bind("Quit"))
+	$PauseMenu/ResumeButton.pressed.connect(menu_button_click.bind("Resume"))
+	$PauseMenu/RestartButton.pressed.connect(menu_button_click.bind("Restart"))
+	$PauseMenu/MenuButton.pressed.connect(menu_button_click.bind("Menu"))
 
 func add_score(scoreToAdd : int):
 	score += scoreToAdd
@@ -11,3 +17,35 @@ func add_score(scoreToAdd : int):
 	if score > Globals.HighScore:
 		Globals.HighScore = score
 		$ScorePanel/HighScore.text = "High Score: " + str(score)
+
+func _input(event: InputEvent) -> void:
+	if InputEvent and event.is_action_pressed("Pause"):
+		paused = !paused
+		toggle_pause()
+
+func toggle_pause():
+	$PauseMenu.visible = paused
+	get_tree().paused = paused
+
+func menu_button_click(button : String):
+	if button == "Resume":
+		paused = false
+		toggle_pause()
+	elif button == "Quit":
+		get_parent().get_parent().get_node("SaveSystem").SaveData()
+		get_tree().quit()
+	elif button == "Restart":
+		paused = false
+		toggle_pause()
+		get_tree().change_scene_to_file("res://MainGame.tscn")
+	elif button == "Menu":
+		print("Menu")
+		paused = false
+		toggle_pause()
+
+func control_slider_toggle(toggled_on: bool) -> void:
+	print("Toggled")
+
+
+func audio_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value - 80.0)

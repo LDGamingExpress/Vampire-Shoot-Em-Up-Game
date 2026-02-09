@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxncduasan7g5"]
+[gd_scene load_steps=6 format=3 uid="uid://cxncduasan7g5"]
 
 [ext_resource type="Script" uid="uid://dxublymem65yo" path="res://GameUI.gd" id="1_vfs0v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oogut"]
 font_size = 20
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vfs0v"]
 font_size = 20
-font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfs0v"]
+bg_color = Color(0.47479695, 1.1130236e-06, 3.6098064e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_guh61"]
+bg_color = Color(0, 0.48102868, 4.813075e-07, 1)
 
 [node name="GameUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +26,7 @@ script = ExtResource("1_vfs0v")
 
 [node name="ScorePanel" type="Panel" parent="."]
 modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -49,3 +55,120 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_vfs0v")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 100.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_vfs0v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_guh61")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="PauseMenu" type="ItemList" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -160.0
+offset_right = 50.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -110.0
+offset_right = 50.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Menu"
+
+[node name="QuitButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -60.0
+offset_right = 50.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Quit"
+
+[node name="ResumeButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 20.0
+offset_right = 50.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "Resume
+"
+
+[node name="AudioSlider" type="HSlider" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 80.0
+
+[node name="ControlsSlider" type="CheckButton" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 70.0
+offset_right = 25.0
+offset_bottom = 94.0
+grow_horizontal = 2
+
+[connection signal="value_changed" from="PauseMenu/AudioSlider" to="." method="audio_changed"]
+[connection signal="toggled" from="PauseMenu/ControlsSlider" to="." method="control_slider_toggle"]
