@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vtu8k8l2kbkb"]
+[gd_scene load_steps=8 format=3 uid="uid://vtu8k8l2kbkb"]
 
 [ext_resource type="Script" uid="uid://f61d5umafdyo" path="res://BulletScript.gd" id="1_4s4u5"]
 [ext_resource type="Texture2D" uid="uid://crufu3yrf3i00" path="res://Textures/spaceshoootemupgamespritesheet.png" id="2_7281b"]
@@ -28,6 +28,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s4u5"]
 radius = 2.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7281b"]
+radius = 193.1269
+
 [node name="Bullet" type="CharacterBody2D"]
 script = ExtResource("1_4s4u5")
 
@@ -39,4 +42,11 @@ sprite_frames = SubResource("SpriteFrames_1rjr3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_4s4u5")
 
+[node name="EnemyDetection" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]
+shape = SubResource("CircleShape2D_7281b")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="EnemyDetection" to="." method="BulletAreaEntered"]

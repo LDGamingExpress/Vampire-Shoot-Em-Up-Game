@@ -29,8 +29,12 @@ func _process(_delta: float) -> void:
 			newBullet.Team = "Player"
 			newBullet.modulate = Color(0.0, 0.0, 1.0, 0.725)
 			get_parent().add_child(newBullet)
+			
+			if Globals.PowerUp == "Missile":
+				newBullet.get_node("EnemyDetection").monitoring = true
+				newBullet.get_node("AnimatedSprite2D").scale = Vector2(.4, .4)
 		
-		if Globals.PowerUp != "Laser":
+		if Globals.PowerUp != "Laser" and Globals.PowerUp != "Missile":
 			Reload(0.2)
 		else:
 			Reload(1.0)

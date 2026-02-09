@@ -6,6 +6,7 @@ var Speed = 500
 var Frame = 0
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
 
+var currentTarget = null
 
 func _ready() -> void:
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
@@ -15,6 +16,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
 		queue_free()
+	
+	if currentTarget != null:
+		var dir = (currentTarget.position - position).normalized()
+		rotation = dir.angle()
+		velocity = dir * (Speed - 200)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.Team != Team:
@@ -32,3 +38,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		elif Globals.PowerUp == "Laser":
 			if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
 				queue_free()
+
+
+func BulletAreaEntered(body: Node2D) -> void:
+	if body.Team != Team and currentTarget == null:
+		currentTarget = body

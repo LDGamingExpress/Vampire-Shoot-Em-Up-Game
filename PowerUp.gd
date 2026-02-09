@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-var possiblePowerUps = ["Spread", "Laser"]
+#var possiblePowerUps = ["Spread", "Laser", "Missile"]
+var possiblePowerUps = ["Missile"]
 var powerUp
 var Speed = 100
 var hit = false
