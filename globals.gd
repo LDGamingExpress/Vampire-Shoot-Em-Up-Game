@@ -8,3 +8,5 @@ var Biome = "Continental"
 # Continental, Arctic, Desert
 
 var PowerUp : String = "None"
+
+var HighScore = 0

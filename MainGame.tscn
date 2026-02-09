@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b535hpfa6lx32"]
+[gd_scene load_steps=5 format=3 uid="uid://b535hpfa6lx32"]
 
 [ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="1_3tbxw"]
 [ext_resource type="Script" uid="uid://fi4kp64vcvqy" path="res://MainGameScript.gd" id="1_ws5ob"]
 [ext_resource type="Script" uid="uid://dywe8c8emboin" path="res://BackgroundObjectsScript.gd" id="2_e3m3f"]
+[ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="4_bqqt8"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ws5ob")
@@ -14,3 +15,7 @@ zoom = Vector2(2, 2)
 script = ExtResource("2_e3m3f")
 
 [node name="Player" parent="." instance=ExtResource("1_3tbxw")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("4_bqqt8")]

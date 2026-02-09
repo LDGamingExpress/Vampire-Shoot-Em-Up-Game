@@ -6,9 +6,9 @@ var Speed = 500
 var Frame = 0
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
 
+
 func _ready() -> void:
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
-	#velocity = Vector2.UP.rotated(rotation) * Speed
 	$AnimatedSprite2D.frame = Frame
 
 func _physics_process(delta: float) -> void:
@@ -24,5 +24,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		newObj.position = position
 		get_parent().add_child(newObj)
 		
+		var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+		UI.add_score(100)
+		
 		if Globals.PowerUp != "Laser":
 			queue_free()
+		elif Globals.PowerUp == "Laser":
+			if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+				queue_free()

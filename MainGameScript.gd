@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 	
 	if time > finishTime:
 		var newObj = powerUp.instantiate()
-		newObj.position = Vector2(randf_range(-100, 100),-200)
+		newObj.position = Vector2(randf_range(-250, 250),-Globals.ScreenSize.y/2)
 		call_deferred("add_child", newObj)
 		
 		time = 0.0

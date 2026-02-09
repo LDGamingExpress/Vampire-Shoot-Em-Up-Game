@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxncduasan7g5"]
+
+[ext_resource type="Script" uid="uid://dxublymem65yo" path="res://GameUI.gd" id="1_vfs0v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oogut"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vfs0v"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vfs0v")
+
+[node name="ScorePanel" type="Panel" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HighScore" type="Label" parent="ScorePanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_right = 220.0
+offset_bottom = 40.0
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_oogut")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="ScorePanel"]
+layout_mode = 0
+offset_left = 280.0
+offset_right = 480.0
+offset_bottom = 40.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_vfs0v")
+horizontal_alignment = 1
+vertical_alignment = 1
