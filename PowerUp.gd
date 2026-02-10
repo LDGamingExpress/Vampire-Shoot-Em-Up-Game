@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func onEntered(body: Node2D) -> void:
 	if body.name == "Player":
+		$GPUParticles2D.emitting = false
 		hit = true
 		body.Upgrade(powerUp)
 		$AnimatedSprite2D.visible = false

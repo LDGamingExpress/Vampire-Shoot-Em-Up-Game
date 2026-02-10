@@ -30,21 +30,24 @@ func _physics_process(delta: float) -> void:
 		velocity = dir * (Speed - 200)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.Team != Team:
-		body.Health -= Damage
-		body.Damaged()
-		var newObj = ExplosionParticles.instantiate()
-		newObj.position = position
-		get_parent().add_child(newObj)
-		
-		var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
-		UI.add_score(100)
-		
-		if Globals.PowerUp != "Laser":
-			queue_free()
-		elif Globals.PowerUp == "Laser":
-			if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+	if position.y >= -Globals.ScreenSize.y/4.0:
+		if body.Team != Team:
+			body.Health -= Damage
+			body.Damaged()
+			var newObj = ExplosionParticles.instantiate()
+			newObj.position = position
+			get_parent().add_child(newObj)
+			
+			var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+			UI.add_score(100)
+			
+			if Globals.PowerUp != "Laser":
 				queue_free()
+			elif Globals.PowerUp == "Laser":
+				if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+					queue_free()
+	else:
+		queue_free()
 
 
 func BulletAreaEntered(body: Node2D) -> void:

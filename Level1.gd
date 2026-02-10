@@ -25,7 +25,7 @@ var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","C
 # Space, Continental, Arctic, Desert
 
 var Dialog = [["HQ","Welcome to the Slice, pilot! This is the only settled Tidally Locked Planet in the Colonies."],
-["HQ","Only a small portion of the planet can support life, so you'll see more buildings below you as we get past the arctic."],
+["HQ","Only a small portion of the planet can support life, so you'll see more buildings below you as you get past the arctic."],
 ["HQ","Some asteroids seem to be entering the atmosphere, so try using them for some target practice."],
 ["You","Yes, sir!"],
 ["Pause",25],
