@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qieeusxoiit2"]
+
+[ext_resource type="Script" uid="uid://cs7ainep3u7f7" path="res://SFXObject.gd" id="1_vescc"]
+
+[node name="SFXObject" type="AudioStreamPlayer2D"]
+script = ExtResource("1_vescc")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

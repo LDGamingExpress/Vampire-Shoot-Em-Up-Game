@@ -5,12 +5,19 @@ var Damage = 1
 var Speed = 500
 var Frame = 0
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
+var SFXObj = load("res://SFXObject.tscn")
 
 var currentTarget = null
 
 func _ready() -> void:
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
 	$AnimatedSprite2D.frame = Frame
+	$AnimatedSprite2D/PointLight2D.color = $AnimatedSprite2D.modulate
+	var newSFX = SFXObj.instantiate()
+	newSFX.stream = load("res://SFX/LaserSoundEffect.mp3")
+	newSFX.position = position
+	newSFX.pitch_scale = randf_range(0.95,1.05)
+	get_parent().call_deferred("add_child",newSFX)
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()

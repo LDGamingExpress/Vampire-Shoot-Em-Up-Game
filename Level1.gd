@@ -1,22 +1,40 @@
 extends Node2D
-var LevelStageEnemies = [["Asteroid",3,3,2.0],
-["Eye",2,10,1.0],
-["Bat",5,10,1.5],
-["Fang",3,15,3.0],
-["BatL",5,50,1.5],
-["EyeR",2,10,1.0],
-["FangL",3,15,2.0],
-["BatR",5,50,1.5],
-["EyeL",2,10,1.0],
-["FangR",3,15,2.0],
-["Asteroid",10,100,3.0]]
+var LevelStageEnemies = [["Pause",0,0,50.0],
+["Asteroid",3,6,2.0],
+["Asteroid",3,30,3.0],
+["Asteroid",10,10,20.0],
+["Bat",5,10,5.0],
+["BatL",5,5,2.0],
+["BatR",5,5,10.0],
+["Bat",8,24,6.0],
+["Fang",2,8,5.0],
+["BatL",5,5,1.0],
+["FangL",2,4,5.0],
+["BatR",5,5,1.0],
+["FangR",2,4,5.0],
+["Fang",6,12,3.0],
+["FangL",2,4,1.0],
+["Bat",5,5,1.0],
+["FangR",2,4,1.0],
+["Bat",15,15,1.0],
+["BatL",6,6,2.0],
+["BatR",6,6,10.0],
+]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
-var LevelBackground = ["Continental","Arctic","Continental","Desert","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic"]
+var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","Alright pilot, this is your first mission."],
-["HQ","Take in the sights, and shoot a few asteroids if you see them."],
-["Pause",12]
+var Dialog = [["HQ","Welcome to the Slice, pilot! This is the only settled Tidally Locked Planet in the Colonies."],
+["HQ","Only a small portion of the planet can support life, so you'll see more buildings below you as we get past the arctic."],
+["HQ","Some asteroids seem to be entering the atmosphere, so try using them for some target practice."],
+["You","Yes, sir!"],
+["Pause",25],
+["HQ","You should be passing over Nova Poltava - home to plenty of cities and - "],
+["You","What the hell?"],
+["HQ","INCOMING, INCOMING, INCOMING! Unknown aircraft have started attacking Nova Poltava!"],
+["Pause",85],
+["HQ","The skies seem to be clearing up, nice job, pilot!"],
+["You","Thank you, sir!"],
 ]
 
 var DialogStage = 0
@@ -27,12 +45,16 @@ var Asteroid = load("res://Asteroid.tscn")
 var Bat = load("res://Bat.tscn")
 var Fang = load("res://FangFighter.tscn")
 var Eye = load("res://SinfulEye.tscn")
+var Explosion = load("res://ExplosionParticles.tscn")
 
 var powerUp = load("res://PowerUp.tscn")
 var time := 0.0
 var finishTime := 0.0
 
+var Music2Play = "res://Music/On A Mission.mp3"
+
 func _ready() -> void:
+	Globals.PlanetType == "Alive"
 	NextDialog()
 	if LevelBackground[0] == "Space":
 		$TileBackground.visible = false
@@ -51,6 +73,8 @@ func EnemySpawner():
 		Globals.Biome = LevelBackground[Stage]
 	if Stage < len(LevelStageEnemies):
 		match LevelStageEnemies[Stage][0]:
+			"Pause":
+				pass
 			"Asteroid":
 				for i in range(0,LevelStageEnemies[Stage][1]):
 					CurrentEnemiesDone += 1
@@ -166,7 +190,7 @@ func SpawnEyeR():
 	call_deferred("add_child",newObj)
 
 func NextDialog():
-	#print("Bloop")
+	
 	if DialogStage < len(Dialog):
 		if Dialog[DialogStage][0] == "Pause":
 			$CanvasLayer/GameUI/DialogPanel.visible = false
@@ -177,3 +201,25 @@ func NextDialog():
 			$CanvasLayer/GameUI.NewDialog(Dialog[DialogStage][0],Dialog[DialogStage][1])
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
+	if DialogStage == 6:
+		await get_tree().create_timer(3.5).timeout
+		Music2Play = "res://Music/Invasion.mp3"
+		Globals.PlanetType = "Dead"
+		var tween = get_tree().create_tween()
+		tween.tween_property($MusicPlayer, "volume_linear", 0.0, 0.8)
+		await get_tree().create_timer(0.8).timeout
+		_on_music_player_finished()
+		var tween2 = get_tree().create_tween()
+		tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
+		await get_tree().create_timer(0.8).timeout
+		for i in range(0,35):
+			var NewObj = Explosion.instantiate()
+			NewObj.position = Vector2(randf_range(-Globals.ScreenSize.x/4.0,Globals.ScreenSize.x/4.0),randf_range(-Globals.ScreenSize.y/4.0,Globals.ScreenSize.y/4.0))
+			add_child(NewObj)
+			await get_tree().create_timer(randf_range(0.1,0.5)).timeout
+		Music2Play = "res://Music/Fallen Souls.mp3"
+
+
+func _on_music_player_finished() -> void:
+	$MusicPlayer.stream = load(Music2Play)
+	$MusicPlayer.play()

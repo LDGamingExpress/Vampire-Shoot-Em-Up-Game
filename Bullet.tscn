@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vtu8k8l2kbkb"]
+[gd_scene load_steps=13 format=3 uid="uid://vtu8k8l2kbkb"]
 
 [ext_resource type="Script" uid="uid://f61d5umafdyo" path="res://BulletScript.gd" id="1_4s4u5"]
 [ext_resource type="Texture2D" uid="uid://crufu3yrf3i00" path="res://Textures/spaceshoootemupgamespritesheet.png" id="2_7281b"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="3_7281b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8st5"]
 atlas = ExtResource("2_7281b")
@@ -11,6 +12,14 @@ region = Rect2(64, 288, 32, 32)
 atlas = ExtResource("2_7281b")
 region = Rect2(96, 288, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rjr3"]
+atlas = ExtResource("3_7281b")
+region = Rect2(288, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iaeh"]
+atlas = ExtResource("3_7281b")
+region = Rect2(448, 288, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1rjr3"]
 animations = [{
 "frames": [{
@@ -19,11 +28,26 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7awvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rjr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3iaeh")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_7281b"]
+offsets = PackedFloat32Array(0, 0.12666667, 0.44, 0.74666667)
+colors = PackedColorArray(1, 1, 1, 0.6666667, 0.556953, 0.556953, 0.5569529, 0.48678017, 0.24840033, 0.24840012, 0.24840015, 0.33035713, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u8st5"]
+gradient = SubResource("Gradient_7281b")
+fill = 1
+fill_from = Vector2(0.4813084, 0.5046729)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4s4u5"]
 radius = 2.0
@@ -37,12 +61,17 @@ script = ExtResource("1_4s4u5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1rjr3")
 
+[node name="PointLight2D" type="PointLight2D" parent="AnimatedSprite2D"]
+texture = SubResource("GradientTexture2D_u8st5")
+
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_4s4u5")
 
 [node name="EnemyDetection" type="Area2D" parent="."]
+visible = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]

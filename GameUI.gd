@@ -46,6 +46,21 @@ func menu_button_click(button : String):
 func control_slider_toggle(toggled_on: bool) -> void:
 	print("Toggled")
 
-
 func audio_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value - 80.0)
+
+func NewDialog(Speaker,Text):
+	if Speaker == "You":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/PilotPortrait.png")
+	elif Speaker == "HQ":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/HQPortrait.png")
+	$DialogPanel/DialogContainer/TextContainer/DialogBox.text = Text
+	$DialogPanel/DialogContainer/TextContainer/NameBox.text = Speaker
+	$DialogPanel/DialogContainer/TextContainer/DialogBox.visible_ratio = 0.0
+	var tween = get_tree().create_tween()
+	tween.tween_property($DialogPanel/DialogContainer/TextContainer/DialogBox,"visible_ratio",1.0,float(len(Text)) * 0.075)
+	#tween.tween_callback(get_parent().get_parent().NextDialog())
+	#print(float(len(Text)) * 0.2)
+	await get_tree().create_timer(float(len(Text)) * 0.2).timeout
+	#print("Bloop2")
+	get_parent().get_parent().NextDialog()

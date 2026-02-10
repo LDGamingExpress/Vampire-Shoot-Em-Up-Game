@@ -28,23 +28,29 @@ func _process(_delta: float) -> void:
 			newBullet.rotation = $Fighter/GunPoints.get_child(i).rotation
 			newBullet.Team = "Player"
 			newBullet.modulate = Color(0.0, 0.0, 1.0, 0.725)
-			get_parent().add_child(newBullet)
 			
 			if Globals.PowerUp == "Missile":
 				newBullet.get_node("EnemyDetection").monitoring = true
-				newBullet.get_node("AnimatedSprite2D").scale = Vector2(.4, .4)
+				newBullet.get_node("AnimatedSprite2D").scale = Vector2(.8, .8)
+				newBullet.Frame = 1
+			if Globals.PowerUp == "Spread":
+				newBullet.Frame = 2
+			if Globals.PowerUp == "Laser":
+				newBullet.modulate = Color(0.102, 0.878, 1.0, 0.725)
+				newBullet.get_node("AnimatedSprite2D").scale = Vector2(2.0, 0.8)
+			get_parent().add_child(newBullet)
 		
 		if Globals.PowerUp != "Laser" and Globals.PowerUp != "Missile":
 			Reload(0.2)
 		else:
-			Reload(1.0)
+			Reload(0.8)
 
 func Reload(time : float):
 	await get_tree().create_timer(time).timeout
 	CanShoot = true
 
 func Damaged():
-	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBar").value = Health
+	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBox").get_node("HealthBar").value = Health
 	if Health <= 0:
 		print("You Died!")
 

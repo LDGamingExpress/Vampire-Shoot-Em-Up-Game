@@ -14,7 +14,7 @@ var TileAllow = [
 	[3,4,4,4]
 ]
 
-func _ready() -> void:
+func GenerateNew() -> void:
 	Biome = Globals.Biome
 	
 	WorldHeight = int(Globals.ScreenSize.y * 1.2 / 32 + 1)
