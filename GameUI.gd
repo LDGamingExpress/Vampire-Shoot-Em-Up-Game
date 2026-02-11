@@ -9,6 +9,8 @@ func _ready() -> void:
 	$PauseMenu/ResumeButton.pressed.connect(menu_button_click.bind("Resume"))
 	$PauseMenu/RestartButton.pressed.connect(menu_button_click.bind("Restart"))
 	$PauseMenu/MenuButton.pressed.connect(menu_button_click.bind("Menu"))
+	
+	$PauseMenu/AudioSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 
 func add_score(scoreToAdd : int):
 	score += scoreToAdd
@@ -37,11 +39,12 @@ func menu_button_click(button : String):
 	elif button == "Restart":
 		paused = false
 		toggle_pause()
-		get_tree().change_scene_to_file("res://MainGame.tscn")
+		Globals.LoadLevel()
 	elif button == "Menu":
-		print("Menu")
+		get_parent().get_parent().get_node("SaveSystem").SaveData()
 		paused = false
 		toggle_pause()
+		get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 func control_slider_toggle(toggled_on: bool) -> void:
 	print("Toggled")
@@ -54,6 +57,10 @@ func NewDialog(Speaker,Text):
 		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/PilotPortrait.png")
 	elif Speaker == "HQ":
 		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/HQPortrait.png")
+	elif Speaker == "Civil Defence":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/CivilDefencePortrait.png")
+	elif Speaker == "Death":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/DeathPortrait.png")
 	$DialogPanel/DialogContainer/TextContainer/DialogBox.text = Text
 	$DialogPanel/DialogContainer/TextContainer/NameBox.text = Speaker
 	$DialogPanel/DialogContainer/TextContainer/DialogBox.visible_ratio = 0.0

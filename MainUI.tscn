@@ -162,6 +162,7 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 80.0
+value = 80.0
 
 [node name="ControlsSlider" type="CheckButton" parent="PauseMenu"]
 layout_mode = 1

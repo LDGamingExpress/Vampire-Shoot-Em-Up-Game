@@ -10,3 +10,9 @@ var Biome = "Continental"
 var PowerUp : String = "None"
 
 var HighScore = 0
+
+var levels = [preload("res://MainGame.tscn")]
+var currentLevel = 0
+
+func LoadLevel():
+	get_tree().change_scene_to_packed(levels[currentLevel])
