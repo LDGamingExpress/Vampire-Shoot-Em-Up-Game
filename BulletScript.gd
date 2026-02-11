@@ -12,6 +12,8 @@ var currentTarget = null
 func _ready() -> void:
 	if Team == "Player" and Globals.PowerUp == "Laser":
 		Speed *= 2
+	elif Team == "Boss":
+		Speed *= 2
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
 	$AnimatedSprite2D.frame = Frame
 	$AnimatedSprite2D/PointLight2D.color = $AnimatedSprite2D.modulate
@@ -22,6 +24,8 @@ func _ready() -> void:
 	if Team == "Player" and Globals.PowerUp == "Laser":
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
 		$Area2D/CollisionShape2D.scale = 1.5
+	elif Team == "Boss":
+		newSFX.pitch_scale = randf_range(0.60, 0.90)
 	else:
 		newSFX.pitch_scale = randf_range(0.95,1.05)
 	get_parent().call_deferred("add_child",newSFX)

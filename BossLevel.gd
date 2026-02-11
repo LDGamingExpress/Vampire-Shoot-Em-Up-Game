@@ -1,38 +1,49 @@
 extends Node2D
-var LevelStageEnemies = [["Pause",0,0,10.0],
-["Asteroid",5,10,2.0],
-["Asteroid",10,30,3.0],
-["Bat",5,10,5.0],
-["Eye",3,6,2.0],
+var LevelStageEnemies = [["Pause",0,0,5.0],
+["Bat",8,16,3.0],
 ["BatL",4,12,2.0],
-["BatR",4,12,2.0],
-["Asteroid",10,10,3.0],
+["Fang",10,20,5.0],
+["Eye",5,10,3.0],
+["Asteroid",10,10,1.0],
+["Pause",0,0,10.0],
 ["EyeL",3,3,1.0],
 ["EyeR",3,3,1.0],
-["Fang",2,6,2.0],
-["Asteroid",10,10,3.0],
-["BatL",5,15,2.0],
-["BatR",5,15,2.0],
-["Bat",3,30,1.5],
-["Fang",2,4,3.0],
-["Asteroid",10,10,3.0],
-["Fang",2,4,2.5],
-["EyeL",3,6,3.0],
-["EyeR",3,6,3.0],
+["Fang",10,20,5.0],
+["Asteroid",10,10,1.0],
+["Eye",5,10,3.0],
+["BatL",5,10,2.0],
+["BatR",5,10,2.0],
+["Fang",5,10,2.5],
+["EyeL",6,12,10.0],
+["EyeR",6,12,10.0],
+["Pause",0,0,10.0],
+["Bat",10,40,1.5],
+["Fang",6,18,3.0],
+["Asteroid",10,10,1.0],
+["Fang",6,18,2.5],
+["EyeL",6,12,3.0],
+["EyeR",6,12,3.0],
 ]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
-var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
+var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","Welcome to the final fronteir."],
-["HQ","The autopilot has been programmed to take you to the Mygeeto system."],
-["HQ","Remember theres no help out here so stay safe and godspeed."],
-["You","Copy."],
-["Pause",85],
-["HQ","Good you've made it. Now get down there and do what you do best."],
-["You","Roger Roger."],
+var Dialog = [["HQ","You're coming up to the command ship."],
+["HQ","Be careful there are bound to be many enemies in this area."],
+["You","Copy that guns ready."],
+["Pause",30],
+["HQ","There it is! Get the r..."],
+["Boss","We've taken over your communications surrender now or die."],
+["You","Never."],
+["Pause",20],
+["Boss","You won't make it past this."],
+["Pause",30],
+["Boss","DIE ALREADY!"],
+["Pause",15],
+["HQ","Communications back online sir. Great, ready the railgun"],
+["HQ","Now pilot take out the command ship"],
+["You","Copy"],
 ]
-var movePlanet = false
 
 var DialogStage = 0
 
@@ -212,18 +223,10 @@ func NextDialog():
 		await get_tree().create_timer(0.8).timeout
 		Music2Play = "res://Music/Fallen Souls.mp3"
 	elif DialogStage == Dialog.size() - 1:
-		movePlanet = true
 		await get_tree().create_timer(15).timeout
 		$CanvasLayer/GameUI.EndLevel()
 	
 	
-func _physics_process(delta: float) -> void:
-	if movePlanet:
-		$Mygeeto.position = $Mygeeto.position.lerp(Vector2(216, -110), .01)
-		if$Mygeeto.position == Vector2(216, -110):
-			movePlanet = false
-	
-
 
 func _on_music_player_finished() -> void:
 	$MusicPlayer.stream = load(Music2Play)

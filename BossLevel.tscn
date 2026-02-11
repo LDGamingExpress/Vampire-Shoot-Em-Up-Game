@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://craf8thlq0fm5"]
+
+[ext_resource type="Script" uid="uid://brxrro2m3a6ng" path="res://BossLevel.gd" id="1_p84dd"]
+[ext_resource type="Script" uid="uid://c3xso6t37phfm" path="res://DataSaves.gd" id="1_prt80"]
+[ext_resource type="Script" uid="uid://dywe8c8emboin" path="res://BackgroundObjectsScript.gd" id="2_p84dd"]
+[ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="3_7b2gy"]
+[ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="4_hu5q4"]
+[ext_resource type="PackedScene" uid="uid://bhnr6rkubpt1g" path="res://Boss.tscn" id="5_0twmt"]
+[ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="5_3cqon"]
+[ext_resource type="AudioStream" uid="uid://cei6857nj0336" path="res://Music/On A Mission.mp3" id="6_mrcxj"]
+
+[node name="BossLevel" type="Node2D"]
+script = ExtResource("1_p84dd")
+
+[node name="SaveSystem" type="Node2D" parent="."]
+script = ExtResource("1_prt80")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Player" parent="." instance=ExtResource("3_7b2gy")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("4_hu5q4")]
+metadata/_edit_use_anchors_ = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mrcxj")
+autoplay = true
+
+[node name="Boss" parent="." instance=ExtResource("5_0twmt")]
+position = Vector2(0, -378)
+rotation = 1.5707964
+
+[node name="BackgroundObjects" type="Node2D" parent="."]
+script = ExtResource("2_p84dd")
+
+[node name="TileBackground" parent="." instance=ExtResource("5_3cqon")]
