@@ -4,10 +4,11 @@ var Team = "Boss"
 var Damage = 1
 var Speed = Globals.PlayerSpeed + randi_range(-5,5) + 80
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
-var Health = 1
+var Health = 9999
 var BulletObj = load("res://Bullet.tscn")
 var Target
 var TargetPos
+var CanShoot = false
 
 func _ready() -> void:
 	Target = get_parent().get_node("Player")
@@ -54,4 +55,5 @@ func FireBurst():
 func _on_timer_timeout() -> void:
 	TargetPos = Target.position
 	MoveGunPoints()
-	FireBurst()
+	if CanShoot:
+		FireBurst()

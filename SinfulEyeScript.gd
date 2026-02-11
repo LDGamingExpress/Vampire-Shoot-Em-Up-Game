@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.Team != "Enemy":
+	if body.Team == "Player" or body.Team == "Ally":
 		body.Health -= Damage
 		body.Damaged()
 		var newObj = ExplosionParticles.instantiate()

@@ -1,14 +1,14 @@
 extends Node2D
 var LevelStageEnemies = [["Pause",0,0,5.0],
-["Bat",8,16,3.0],
-["BatL",4,12,2.0],
-["Fang",10,20,5.0],
+["Bat",8,32,3.0],
+["BatL",8,24,2.0],
+["Fang",5,20,2.0],
 ["Eye",5,10,3.0],
 ["Asteroid",10,10,1.0],
 ["Pause",0,0,10.0],
 ["EyeL",3,3,1.0],
 ["EyeR",3,3,1.0],
-["Fang",10,20,5.0],
+["Fang",5,20,2.0],
 ["Asteroid",10,10,1.0],
 ["Eye",5,10,3.0],
 ["BatL",5,10,2.0],
@@ -31,19 +31,21 @@ var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","
 var Dialog = [["HQ","You're coming up to the command ship."],
 ["HQ","Be careful there are bound to be many enemies in this area."],
 ["You","Copy that guns ready."],
-["Pause",30],
+["Pause",18],
 ["HQ","There it is! Get the r..."],
-["Boss","We've taken over your communications surrender now or die."],
+["Death","We've taken over your communications surrender now or die."],
 ["You","Never."],
-["Pause",20],
-["Boss","You won't make it past this."],
+["Pause",25],
+["Death","You won't make it past this."],
 ["Pause",30],
-["Boss","DIE ALREADY!"],
+["Death","DIE ALREADY!"],
 ["Pause",15],
-["HQ","Communications back online sir. Great, ready the railgun"],
-["HQ","Now pilot take out the command ship"],
+["HQ","Communications back online sir. Great, ready the railgun."],
+["HQ","Railgun ready."],
+["HQ","Now pilot take out the command ship."],
 ["You","Copy"],
 ]
+var moveShip = false
 
 var DialogStage = 0
 
@@ -210,23 +212,19 @@ func NextDialog():
 			$CanvasLayer/GameUI.NewDialog(Dialog[DialogStage][0],Dialog[DialogStage][1])
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
-	if DialogStage == 8:
-		await get_tree().create_timer(3.5).timeout
-		Music2Play = "res://Music/Invasion.mp3"
-		Globals.PlanetType = "Dead"
-		var tween = get_tree().create_tween()
-		tween.tween_property($MusicPlayer, "volume_linear", 0.0, 0.8)
-		await get_tree().create_timer(0.8).timeout
-		_on_music_player_finished()
-		var tween2 = get_tree().create_tween()
-		tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
-		await get_tree().create_timer(0.8).timeout
-		Music2Play = "res://Music/Fallen Souls.mp3"
+	if DialogStage == 5:
+		moveShip = true
+	elif DialogStage == 11:
+		$Boss.CanShoot = true
 	elif DialogStage == Dialog.size() - 1:
-		await get_tree().create_timer(15).timeout
-		$CanvasLayer/GameUI.EndLevel()
+		$Player.Upgrade("Railgun")
 	
-	
+
+func _physics_process(delta: float) -> void:
+	if moveShip:
+		$Boss.position = $Boss.position.lerp(Vector2(0, -240), 0.01)
+		if $Boss.position.y >= -241:
+			moveShip = false
 
 func _on_music_player_finished() -> void:
 	$MusicPlayer.stream = load(Music2Play)
