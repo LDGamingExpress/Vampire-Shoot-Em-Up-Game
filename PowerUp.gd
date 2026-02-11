@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var possiblePowerUps = ["Spread", "Laser", "Missile"]
+var possiblePowerUps = ["Spread", "Laser", "Missile", "Shield"]
 var powerUp
 var Speed = 100
 var hit = false
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func onEntered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and !hit:
 		$GPUParticles2D.emitting = false
 		hit = true
 		body.Upgrade(powerUp)

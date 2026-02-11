@@ -9,9 +9,10 @@ var Biome = "Continental"
 
 var PowerUp : String = "None"
 
-var HighScore = 0
+var HighScore := [0, 0, 0, 0, 0, 0, 0, 0]
+var HighScores := [0, 0, 0, 0, 0, 0, 0, 0]
 
-var levels = [preload("res://MainGame.tscn")]
+var levels = [preload("res://Level1.tscn"), preload("res://Level2.tscn")]
 var currentLevel = 0
 
 func LoadLevel():

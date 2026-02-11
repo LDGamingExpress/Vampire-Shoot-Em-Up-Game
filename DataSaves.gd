@@ -10,7 +10,7 @@ func _ready() -> void:
 func SaveData():
 	var config = ConfigFile.new()
 	
-	config.set_value("Player", "HScore", Globals.HighScore)
+	config.set_value("Player", "HScores", Globals.HighScores)
 	
 	config.save(PATH)
 
@@ -19,7 +19,7 @@ func LoadData():
 	
 	config.load(PATH)
 	
-	Globals.HighScore = config.get_value("Player", "HScore", 0)
+	Globals.HighScores = config.get_value("Player", "HScores", [0, 0, 0, 0, 0, 0, 0, 0])
 
 func _process(delta: float) -> void:
 	time += delta

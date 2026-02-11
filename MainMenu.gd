@@ -15,7 +15,7 @@ func _ready() -> void:
 	$LevelsPanel/Level7.pressed.connect(select_level.bind(6))
 	$LevelsPanel/Level8.pressed.connect(select_level.bind(7))
 	
-	$SettingsPanel/AudioSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	$SettingsPanel/AudioSlider.value = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")) + 80
 	$SettingsPanel/ControlsSlider.button_pressed = false
 	
 
@@ -31,10 +31,16 @@ func menu_button_click(button : String):
 		Globals.LoadLevel()
 	elif button == "Levels":
 		$LevelsPanel.visible = true
+		$MainButtons.visible = false
+	elif button == "Settings":
+		$SettingsPanel.visible = true
+		$MainButtons.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if InputEvent and event.is_action_pressed("Pause") and $LevelsPanel.visible:
+	if InputEvent and event.is_action_pressed("Pause"):
 		$LevelsPanel.visible = false
+		$SettingsPanel.visible = false
+		$MainButtons.visible = true
 
 func control_slider_toggle(toggled_on: bool) -> void:
 	print("Toggled")

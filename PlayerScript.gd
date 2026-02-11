@@ -40,19 +40,25 @@ func _process(_delta: float) -> void:
 				newBullet.get_node("AnimatedSprite2D").scale = Vector2(2.0, 0.8)
 			get_parent().add_child(newBullet)
 		
-		if Globals.PowerUp != "Laser" and Globals.PowerUp != "Missile":
+		if Globals.PowerUp == "Laser" or Globals.PowerUp == "Missile":
+			Reload(0.8)
+		elif Globals.PowerUp == "Spread":
 			Reload(0.2)
 		else:
-			Reload(0.8)
+			Reload(0.5)
 
 func Reload(time : float):
 	await get_tree().create_timer(time).timeout
 	CanShoot = true
 
 func Damaged():
-	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBox").get_node("HealthBar").value = Health
+	if Globals.PowerUp == "Shield":
+		Health += 1
 	if Health <= 0:
-		print("You Died!")
+		get_parent().get_node("CanvasLayer").get_node("GameUI").Dead()
+	
+	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBox").get_node("HealthBar").value = Health
+	
 
 
 func Upgrade(type : String):
@@ -60,6 +66,8 @@ func Upgrade(type : String):
 		if Globals.PowerUp == "Spread":
 			$Fighter/GunPoints.get_child(2).queue_free()
 			$Fighter/GunPoints.get_child(3).queue_free()
+		if Globals.PowerUp == "Shield":
+			$Fighter.modulate = Color(1, 1, 1, 1)
 	
 	Globals.PowerUp = type
 	
@@ -75,5 +83,6 @@ func Upgrade(type : String):
 		
 		P1.rotation = $Fighter/GunPoints.get_child(0).rotation - .5
 		P2.rotation = $Fighter/GunPoints.get_child(1).rotation + .5
-	
+	elif type == "Shield":
+		$Fighter.modulate = Color(0, 0.89, 0.9, 1)
 	
