@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vtu8k8l2kbkb"]
+[gd_scene load_steps=14 format=3 uid="uid://vtu8k8l2kbkb"]
 
 [ext_resource type="Script" uid="uid://f61d5umafdyo" path="res://BulletScript.gd" id="1_4s4u5"]
 [ext_resource type="Texture2D" uid="uid://crufu3yrf3i00" path="res://Textures/spaceshoootemupgamespritesheet.png" id="2_7281b"]
@@ -20,6 +20,10 @@ region = Rect2(288, 288, 32, 32)
 atlas = ExtResource("3_7281b")
 region = Rect2(448, 288, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7281b"]
+atlas = ExtResource("3_7281b")
+region = Rect2(544, 352, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_1rjr3"]
 animations = [{
 "frames": [{
@@ -34,6 +38,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3iaeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7281b")
 }],
 "loop": true,
 "name": &"default",
