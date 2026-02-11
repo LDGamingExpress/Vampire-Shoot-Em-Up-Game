@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 				newBullet.Frame = 2
 			if Globals.PowerUp == "Laser":
 				newBullet.modulate = Color(0.102, 0.878, 1.0, 0.725)
-				newBullet.get_node("AnimatedSprite2D").scale = Vector2(2.0, 0.8)
+				newBullet.get_node("AnimatedSprite2D").scale = Vector2(3.0, 0.8)
 			get_parent().add_child(newBullet)
 		
 		if Globals.PowerUp == "Laser" or Globals.PowerUp == "Missile":

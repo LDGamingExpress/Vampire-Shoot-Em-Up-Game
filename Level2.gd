@@ -6,42 +6,33 @@ var LevelStageEnemies = [["Pause",0,0,10.0],
 ["Eye",3,6,2.0],
 ["BatL",4,12,2.0],
 ["BatR",4,12,2.0],
+["Asteroid",10,10,3.0],
 ["EyeL",3,3,1.0],
 ["EyeR",3,3,1.0],
 ["Fang",2,6,2.0],
+["Asteroid",10,10,3.0],
 ["BatL",5,15,2.0],
 ["BatR",5,15,2.0],
 ["Bat",3,30,1.5],
 ["Fang",2,4,3.0],
-["Bat",5,30,1.5],
-["Bat",2,10,2.0],
+["Asteroid",10,10,3.0],
 ["Fang",2,4,2.5],
+["EyeL",3,6,3.0],
+["EyeR",3,6,3.0],
 ]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
-var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
+var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","Welcome to the Slice, pilot! This is the only settled Tidally Locked Planet in the Colonies."],
-["HQ","Only a small portion of the planet can support life, but its still our home."],
-["HQ","Some asteroids seem to be entering the atmosphere, so try using them for some target practice."],
-["You","Roger that, charging lasers."],
-["Pause",30],
-["HQ","You should be passing over Nova Poltava - home to plenty of cities and - "],
-["You","What the hell?"],
-["Civil Defence","INCOMING, INCOMING, INCOMING! Unknown aircraft have started attacking Nova Poltava!"],
-["You","HQ, come in! Please respond!"],
-["Pause",10],
-["Civil Defence","They're getting in-        -are dead. They were torn to pieces and not a drop of blood was left! Please someone help us!"],
+var Dialog = [["HQ","Welcome to the final fronteir."],
+["HQ","The autopilot has been programmed to take you to the Mygeeto system."],
+["HQ","Remember theres no help out here so stay safe and godspeed."],
+["You","Copy."],
 ["Pause",85],
-["HQ","Pilot, are you still out there?"],
-["You","Affirmative, HQ. What's attacking us and how is it even night on this side of planet?"],
-["HQ","A race of hemovores, or 'Vampires,' has launched a surprise attack throughout the Colonies."],
-["HQ","They have a starship that appears to be blotting out the Sun to leave us in darkness."],
-["You","How is that even - Nevermind, what's the plan?"],
-["HQ","Once you finish up these last stragglers here on the Slice, we need you to lead a counter attack starting from Bounty."],
-["HQ","With each planet retaken, you'll be one step closer to the center of the system and destroying their flagship."],
-["You","Understood, HQ. This should be the last of them. I'll reroute for Bounty now."]
+["HQ","Good you've made it. Now get down there and do what you do best."],
+["You","Roger Roger."],
 ]
+var movePlanet = false
 
 var DialogStage = 0
 
@@ -124,8 +115,6 @@ func EnemySpawner():
 					SpawnEyeR()
 		await get_tree().create_timer(LevelStageEnemies[Stage][3]).timeout
 		EnemySpawner()
-	elif $CanvasLayer/GameUI/CompleteLevel.visible == false:
-		$CanvasLayer/GameUI.EndLevel()
 
 func SpawnAsteroid():
 	var newObj = Asteroid.instantiate()
@@ -210,7 +199,7 @@ func NextDialog():
 			$CanvasLayer/GameUI.NewDialog(Dialog[DialogStage][0],Dialog[DialogStage][1])
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
-	if DialogStage == 6:
+	if DialogStage == 8:
 		await get_tree().create_timer(3.5).timeout
 		Music2Play = "res://Music/Invasion.mp3"
 		Globals.PlanetType = "Dead"
@@ -222,6 +211,18 @@ func NextDialog():
 		tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
 		await get_tree().create_timer(0.8).timeout
 		Music2Play = "res://Music/Fallen Souls.mp3"
+	elif DialogStage == Dialog.size() - 1:
+		movePlanet = true
+		await get_tree().create_timer(10).timeout
+		$CanvasLayer/GameUI.EndLevel()
+	
+	
+func _physics_process(delta: float) -> void:
+	if movePlanet:
+		$Mygeeto.position = $Mygeeto.position.lerp(Vector2(216, -110), .01)
+		if$Mygeeto.position == Vector2(216, -110):
+			movePlanet = false
+	
 
 
 func _on_music_player_finished() -> void:

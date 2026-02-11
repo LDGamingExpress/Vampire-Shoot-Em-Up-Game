@@ -9,10 +9,10 @@ default_font = ExtResource("1_guh61")
 default_font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_oogut"]
-font_size = 32
+font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_vfs0v"]
-font_size = 32
+font_size = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfs0v"]
 bg_color = Color(0.47479695, 1.1130236e-06, 3.6098064e-07, 1)

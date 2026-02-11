@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqdhvbi368tij"]
+
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="1_2kgxn"]
+
+[node name="Mygeeto" type="CharacterBody2D"]
+
+[node name="Mygeeto" type="Sprite2D" parent="."]
+scale = Vector2(2.4508033, 2.4508033)
+texture = ExtResource("1_2kgxn")
+region_enabled = true
+region_rect = Rect2(352, 192, 96, 96)

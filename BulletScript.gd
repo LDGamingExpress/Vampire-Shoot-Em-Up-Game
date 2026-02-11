@@ -10,13 +10,20 @@ var SFXObj = load("res://SFXObject.tscn")
 var currentTarget = null
 
 func _ready() -> void:
+	if Team == "Player" and Globals.PowerUp == "Laser":
+		Speed *= 2
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
 	$AnimatedSprite2D.frame = Frame
 	$AnimatedSprite2D/PointLight2D.color = $AnimatedSprite2D.modulate
 	var newSFX = SFXObj.instantiate()
 	newSFX.stream = load("res://SFX/LaserSoundEffect.mp3")
 	newSFX.position = position
-	newSFX.pitch_scale = randf_range(0.95,1.05)
+	
+	if Team == "Player" and Globals.PowerUp == "Laser":
+		newSFX.pitch_scale = randf_range(0.60, 0.90)
+		$Area2D/CollisionShape2D.scale = 1.5
+	else:
+		newSFX.pitch_scale = randf_range(0.95,1.05)
 	get_parent().call_deferred("add_child",newSFX)
 
 func _physics_process(delta: float) -> void:
@@ -39,7 +46,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			get_parent().add_child(newObj)
 			
 			var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
-			UI.add_score(100)
+			
+			if Team == "Player":
+				UI.add_score(body.get_node("PointValue").value)
 			
 			if Globals.PowerUp != "Laser":
 				queue_free()
