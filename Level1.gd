@@ -58,6 +58,8 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["Bat",3,30,1.5],
 ["Fang",2,4,3.0],
 ["Bat",5,30,1.5],
+["Bat",2,10,2.0],
+["Fang",2,4,2.5],
 ]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
 var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert"]
@@ -118,7 +120,8 @@ func EnemySpawner():
 	if CurrentEnemiesDone >= LevelStageEnemies[Stage][2]:
 		Stage += 1
 		CurrentEnemiesDone = 0
-		Globals.Biome = LevelBackground[Stage]
+		if len(LevelBackground) > Stage:
+			Globals.Biome = LevelBackground[Stage]
 	if Stage < len(LevelStageEnemies):
 		match LevelStageEnemies[Stage][0]:
 			"Pause":
