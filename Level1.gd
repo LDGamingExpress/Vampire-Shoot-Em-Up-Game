@@ -31,7 +31,7 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["FangL",2,4,1.0],
 ["Bat",5,5,1.0],
 ["FangR",2,4,1.0],
-["Eye",5,5,2.0],
+["Eye",4,4,2.0],
 ["Fang",12,12,1.0],
 ["FangL",3,6,1.5],
 ["FangR",3,6,1.5],
@@ -39,13 +39,13 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["Fang",3,3,1.0],
 ["Bat",15,15,1.0],
 ["Fang",3,3,1.0],
-["EyeL",2,4,2.0],
+["EyeL",1,2,2.0],
 ["Bat",5,10,1.0],
 ["Bat",12,12,2.0],
-["Fang",8,8,2.0],
+["Fang",5,5,2.0],
 ["FangL",3,6,1.0],
 ["Bat",5,5,1.0],
-["FangR",3,6,1.0],
+["FangR",2,4,1.0],
 ["Eye",2,4,2.0],
 ["Fang",10,20,2.0],
 ["Bat",5,10,2.0],
@@ -59,7 +59,7 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["Fang",2,4,3.0],
 ["Bat",5,30,1.5],
 ["Bat",2,10,2.0],
-["Fang",2,4,2.5],
+["Fang",2,6,2.5],
 ]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
 var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert"]
@@ -82,9 +82,9 @@ var Dialog = [["HQ","Welcome to the Slice, pilot! This is the only settled Tidal
 ["HQ","A race of hemovores, or 'Vampires,' has launched a surprise attack throughout the Colonies."],
 ["HQ","They have a starship that appears to be blotting out the Sun to leave us in darkness."],
 ["You","How is that even - Nevermind, what's the plan?"],
-["HQ","Once you finish up these last stragglers here on the Slice, we need you to lead a counter attack starting from Bounty."],
+["HQ","Once you finish up these last stragglers here on the Slice, we need you to lead a counter attack starting from the inner colony of Bounty."],
 ["HQ","With each planet retaken, you'll be one step closer to the center of the system and destroying their flagship."],
-["You","Understood, HQ. This should be the last of them. I'll reroute for Bounty now."]
+["You","Understood, HQ. This should be the last of them. I'll head out for Bounty now."]
 ]
 
 var DialogStage = 0

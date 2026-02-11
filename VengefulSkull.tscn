@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://k4l17unsekq6"]
+[gd_scene load_steps=13 format=3 uid="uid://cs5lwixq3otfx"]
 
-[ext_resource type="Script" uid="uid://dyymf0cqyk38t" path="res://FangFighterScript.gd" id="1_b5507"]
-[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_luidn"]
+[ext_resource type="Script" uid="uid://cxk2xudjxak80" path="res://SkullScript.gd" id="1_yd5pt"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_s35li"]
+[ext_resource type="PackedScene" uid="uid://bbotfp527uth3" path="res://Turret.tscn" id="3_eamjc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtmkw"]
-atlas = ExtResource("2_luidn")
-region = Rect2(512, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_il83t"]
+atlas = ExtResource("2_s35li")
+region = Rect2(576, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jo42q"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6j5b7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gtmkw")
+"texture": SubResource("AtlasTexture_il83t")
 }],
 "loop": true,
 "name": &"default",
@@ -20,9 +21,6 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_luidn"]
 radius = 30.265491
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gtmkw"]
-radius = 15.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r6jf1"]
 load_path = "res://.godot/imported/FireParticle.png-c6f477c14192667766c9fe5eb3333847.ctex"
@@ -52,42 +50,25 @@ gravity = Vector3(0, 5, 0)
 scale_curve = SubResource("CurveTexture_2epib")
 color_ramp = SubResource("GradientTexture1D_o2woo")
 
-[node name="FangFighter" type="CharacterBody2D"]
+[node name="VengefulSkull" type="CharacterBody2D" groups=["Skull"]]
 collision_mask = 0
-script = ExtResource("1_b5507")
+script = ExtResource("1_yd5pt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_jo42q")
+sprite_frames = SubResource("SpriteFrames_6j5b7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_luidn")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_gtmkw")
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-self_modulate = Color(0.38074398, 0.017965917, 0, 1)
+self_modulate = Color(0.4117647, 0.5882353, 0.5176471, 1)
 z_index = 2
-position = Vector2(-8, 0)
+position = Vector2(-24, -2)
 emitting = false
 amount = 15
 texture = SubResource("CompressedTexture2D_r6jf1")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_d2utv")
-
-[node name="GunPoints" type="Node2D" parent="."]
-
-[node name="Node2D" type="Node2D" parent="GunPoints"]
-position = Vector2(13, -8.5)
-
-[node name="Node2D2" type="Node2D" parent="GunPoints"]
-position = Vector2(13, 8.5)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
 
 [node name="PointValue" type="HSlider" parent="."]
 visible = false
@@ -96,5 +77,11 @@ offset_bottom = 16.0
 max_value = 500.0
 value = 200.0
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Turrets" type="Node2D" parent="."]
+
+[node name="Turret" parent="Turrets" instance=ExtResource("3_eamjc")]
+position = Vector2(-16, -19)
+Type = 2
+
+[node name="Turret2" parent="Turrets" instance=ExtResource("3_eamjc")]
+position = Vector2(17, -11)

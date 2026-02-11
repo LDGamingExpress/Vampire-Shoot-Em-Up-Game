@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 	if Team == "Player" and Globals.PowerUp == "Laser":
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
-		$Area2D/CollisionShape2D.scale = 1.5
+		$Area2D/CollisionShape2D.scale = Vector2(1.5,1.5)
 	elif Team == "Boss":
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
 	else:
@@ -43,22 +43,40 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if position.y >= -Globals.ScreenSize.y/4.0:
 		if body.Team != Team:
-			body.Health -= Damage
-			body.Damaged()
-			var newObj = ExplosionParticles.instantiate()
-			newObj.position = position
-			get_parent().add_child(newObj)
-			
-			var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
-			
-			if Team == "Player":
-				UI.add_score(body.get_node("PointValue").value)
-			
-			if Globals.PowerUp != "Laser":
-				queue_free()
-			elif Globals.PowerUp == "Laser":
-				if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+			if !body.is_in_group("Skull"):
+				body.Health -= Damage
+				body.Damaged()
+				var newObj = ExplosionParticles.instantiate()
+				newObj.position = position
+				get_parent().add_child(newObj)
+				
+				var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+				
+				if Team == "Player":
+					UI.add_score(body.get_node("PointValue").value)
+				
+				if Globals.PowerUp != "Laser":
 					queue_free()
+				elif Globals.PowerUp == "Laser":
+					if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+						queue_free()
+			elif body.CanDamage:
+				body.Health -= Damage
+				body.Damaged()
+				var newObj = ExplosionParticles.instantiate()
+				newObj.position = position
+				get_parent().add_child(newObj)
+				
+				var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+				
+				if Team == "Player":
+					UI.add_score(body.get_node("PointValue").value)
+				
+				if Globals.PowerUp != "Laser":
+					queue_free()
+				elif Globals.PowerUp == "Laser":
+					if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
+						queue_free()
 	else:
 		queue_free()
 

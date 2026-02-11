@@ -25,7 +25,7 @@ var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","
 # Space, Continental, Arctic, Desert
 
 var Dialog = [["HQ","Welcome to the final fronteir."],
-["HQ","The autopilot has been programmed to take you to the Mygeeto system."],
+["HQ","The autopilot has been programmed to take you to the inner system."],
 ["HQ","Remember theres no help out here so stay safe and godspeed."],
 ["You","Copy."],
 ["Pause",85],

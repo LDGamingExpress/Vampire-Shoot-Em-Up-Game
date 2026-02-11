@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbotfp527uth3"]
+
+[ext_resource type="Script" uid="uid://c3w4mkh807ji5" path="res://TurretScript.gd" id="1_uijts"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_iwplw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvatt"]
+atlas = ExtResource("2_iwplw")
+region = Rect2(576, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc5tq"]
+atlas = ExtResource("2_iwplw")
+region = Rect2(480, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3wxe"]
+atlas = ExtResource("2_iwplw")
+region = Rect2(544, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lugvd"]
+atlas = ExtResource("2_iwplw")
+region = Rect2(480, 320, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpjfm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvatt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc5tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3wxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lugvd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_luidn"]
+radius = 30.265491
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmc2m"]
+radius = 800.0
+
+[node name="Turret" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_uijts")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dpjfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_luidn")
+
+[node name="GunPoints" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="GunPoints"]
+position = Vector2(13, -8.5)
+
+[node name="Node2D2" type="Node2D" parent="GunPoints"]
+position = Vector2(13, 8.5)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="PointValue" type="HSlider" parent="."]
+visible = false
+offset_right = 8.0
+offset_bottom = 16.0
+max_value = 500.0
+value = 200.0
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_pmc2m")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]

@@ -1,5 +1,6 @@
 extends Node2D
-var LevelStageEnemies = [["Asteroid",3,3,2.0],
+var LevelStageEnemies = [["Skull",1,1,2.0],
+["Asteroid",3,3,50.0],
 ["Eye",2,10,1.0],
 ["Bat",5,10,1.5],
 ["Fang",3,15,3.0],
@@ -27,6 +28,7 @@ var Asteroid = load("res://Asteroid.tscn")
 var Bat = load("res://Bat.tscn")
 var Fang = load("res://FangFighter.tscn")
 var Eye = load("res://SinfulEye.tscn")
+var Skull = load("res://VengefulSkull.tscn")
 
 var powerUp = load("res://PowerUp.tscn")
 var time := 0.0
@@ -91,6 +93,10 @@ func EnemySpawner():
 				for i in range(0,LevelStageEnemies[Stage][1]):
 					CurrentEnemiesDone += 1
 					SpawnEyeR()
+			"Skull":
+				for i in range(0,LevelStageEnemies[Stage][1]):
+					CurrentEnemiesDone += 1
+					SpawnSkull()
 		await get_tree().create_timer(LevelStageEnemies[Stage][3]).timeout
 		EnemySpawner()
 
@@ -163,6 +169,12 @@ func SpawnEyeR():
 	var newObj = Eye.instantiate()
 	newObj.position = Vector2(randf_range(0,Globals.ScreenSize.x/2.0),-Globals.ScreenSize.y/2)
 	newObj.rotation = 3*PI/4
+	call_deferred("add_child",newObj)
+
+func SpawnSkull():
+	var newObj = Skull.instantiate()
+	newObj.position = Vector2(randf_range(-Globals.ScreenSize.x/4.5,Globals.ScreenSize.x/4.5),-Globals.ScreenSize.y/2)
+	newObj.rotation = PI/2
 	call_deferred("add_child",newObj)
 
 func NextDialog():

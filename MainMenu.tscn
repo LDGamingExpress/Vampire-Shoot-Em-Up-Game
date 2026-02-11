@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://gutulmqt4ifm"]
+[gd_scene load_steps=15 format=4 uid="uid://gutulmqt4ifm"]
 
+[ext_resource type="Theme" uid="uid://bgv6pguoxu4le" path="res://Textures/BasicTheme.tres" id="1_7r1g0"]
 [ext_resource type="Script" uid="uid://duklbdw0elhnu" path="res://MainMenu.gd" id="1_i26rj"]
 [ext_resource type="Script" uid="uid://bsnbjbr62n87e" path="res://FakeFighter.gd" id="2_h7a2f"]
 [ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="3_qoqlk"]
@@ -457,6 +458,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_7r1g0")
 script = ExtResource("1_i26rj")
 
 [node name="LevelsPanel" type="Panel" parent="MenuUI"]
@@ -483,6 +485,7 @@ offset_left = 25.0
 offset_top = 25.0
 offset_right = 75.0
 offset_bottom = 75.0
+mouse_default_cursor_shape = 2
 text = "1"
 
 [node name="Level2" type="Button" parent="MenuUI/LevelsPanel"]
@@ -491,6 +494,7 @@ offset_left = 90.0
 offset_top = 25.0
 offset_right = 140.0
 offset_bottom = 75.0
+mouse_default_cursor_shape = 2
 text = "2"
 
 [node name="Level3" type="Button" parent="MenuUI/LevelsPanel"]
@@ -503,6 +507,7 @@ offset_top = 25.0
 offset_right = 55.0
 offset_bottom = 75.0
 grow_horizontal = 2
+mouse_default_cursor_shape = 2
 text = "3"
 
 [node name="Level4" type="Button" parent="MenuUI/LevelsPanel"]
@@ -515,6 +520,7 @@ offset_top = 25.0
 offset_right = -30.0
 offset_bottom = 75.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 text = "4
 "
 
@@ -524,6 +530,7 @@ offset_left = 25.0
 offset_top = 90.0
 offset_right = 75.0
 offset_bottom = 140.0
+mouse_default_cursor_shape = 2
 text = "5"
 
 [node name="Level6" type="Button" parent="MenuUI/LevelsPanel"]
@@ -532,6 +539,7 @@ offset_left = 90.0
 offset_top = 90.0
 offset_right = 140.0
 offset_bottom = 140.0
+mouse_default_cursor_shape = 2
 text = "6"
 
 [node name="Level7" type="Button" parent="MenuUI/LevelsPanel"]
@@ -544,6 +552,7 @@ offset_top = 90.0
 offset_right = 55.0
 offset_bottom = 140.0
 grow_horizontal = 2
+mouse_default_cursor_shape = 2
 text = "7"
 
 [node name="Level8" type="Button" parent="MenuUI/LevelsPanel"]
@@ -556,6 +565,7 @@ offset_top = 90.0
 offset_right = -30.0
 offset_bottom = 140.0
 grow_horizontal = 0
+mouse_default_cursor_shape = 2
 text = "8
 "
 
@@ -623,6 +633,7 @@ offset_right = 30.0
 offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 text = "Play
 "
 
@@ -638,6 +649,7 @@ offset_top = -40.0
 offset_right = 30.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 text = "Settings
 "
 
@@ -654,6 +666,7 @@ offset_right = 30.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 text = "Levels
 "
 
@@ -670,6 +683,7 @@ offset_right = 30.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 text = "Quit
 "
 
