@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 	else:
 		position = Vector2(lerp(position.x,MousePos.x,50/posDif),lerp(position.y,MousePos.y,50/posDif))
 	
-	if Input.is_action_pressed("Shoot") and CanShoot:
+	if Input.is_action_pressed("Shoot") and CanShoot and Globals.PowerUp != "Railgun":
 		CanShoot = false
 		for i in range(0,$Fighter/GunPoints.get_child_count()):
 			var newBullet = BulletObj.instantiate()
@@ -46,6 +46,19 @@ func _process(_delta: float) -> void:
 			Reload(0.2)
 		else:
 			Reload(0.5)
+	elif Input.is_action_pressed("Shoot") and CanShoot and Globals.PowerUp == "Railgun":
+		CanShoot = false
+		var newBullet = BulletObj.instantiate()
+		newBullet.position = global_position
+		newBullet.Frame = 1
+		newBullet.get_node("AnimatedSprite2D").scale = Vector2(2, 2)
+		newBullet.Speed = 1000
+		newBullet.rotation = rotation
+		newBullet.Team = "Player"
+		newBullet.Damage = 10000
+		newBullet.modulate = Color(0.365, 0.0, 0.352, 1.0)
+		get_parent().add_child(newBullet)
+		Reload(20)
 
 func Reload(time : float):
 	await get_tree().create_timer(time).timeout
@@ -69,7 +82,8 @@ func Upgrade(type : String):
 		if Globals.PowerUp == "Shield":
 			$Fighter.modulate = Color(1, 1, 1, 1)
 	
-	Globals.PowerUp = type
+	if Globals.PowerUp != "Railgun":
+		Globals.PowerUp = type
 	
 	if type == "Spread":	
 		var P1 = gunPoint.instantiate()

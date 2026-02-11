@@ -21,9 +21,9 @@ func _ready() -> void:
 	newSFX.stream = load("res://SFX/LaserSoundEffect.mp3")
 	newSFX.position = position
 	
-	if Team == "Player" and Globals.PowerUp == "Laser":
+	if Team == "Player" and (Globals.PowerUp == "Laser" or Globals.PowerUp == "Railgun"):
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
-		$Area2D/CollisionShape2D.scale = 1.5
+		$Area2D/CollisionShape2D.scale = Vector2(1.5, 1.5)
 	elif Team == "Boss":
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
 	else:
@@ -51,7 +51,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			
 			var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
 			
-			if Team == "Player":
+			if Team == "Player" and body.Team != "Boss":
 				UI.add_score(body.get_node("PointValue").value)
 			
 			if Globals.PowerUp != "Laser":
