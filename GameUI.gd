@@ -54,6 +54,10 @@ func NewDialog(Speaker,Text):
 		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/PilotPortrait.png")
 	elif Speaker == "HQ":
 		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/HQPortrait.png")
+	elif Speaker == "Civil Defence":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/CivilDefencePortrait.png")
+	elif Speaker == "Death":
+		$DialogPanel/DialogContainer/TextureRect.texture = load("res://Textures/DeathPortrait.png")
 	$DialogPanel/DialogContainer/TextContainer/DialogBox.text = Text
 	$DialogPanel/DialogContainer/TextContainer/NameBox.text = Speaker
 	$DialogPanel/DialogContainer/TextContainer/DialogBox.visible_ratio = 0.0

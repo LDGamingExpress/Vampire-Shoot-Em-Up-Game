@@ -23,7 +23,7 @@ colors = PackedColorArray(6.34502, 6.34502, 6.34502, 1, 15.863711, 15.863711, 15
 gradient = SubResource("Gradient_kfj16")
 
 [sub_resource type="Curve" id="Curve_sdjpg"]
-_data = [Vector2(0, 0), 0.0, 3.8932588, 0, 0, Vector2(1, 0), -9.331461, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 3.244382, 0, 0, Vector2(1, 0), -3.4297771, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_34k2a"]

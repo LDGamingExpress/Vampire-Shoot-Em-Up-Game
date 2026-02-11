@@ -19,22 +19,70 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["Bat",15,15,1.0],
 ["BatL",6,6,2.0],
 ["BatR",6,6,10.0],
+["Eye",2,4,2.0],
+["Fang",10,10,2.0],
+["BatL",10,10,1.0],
+["BatR",10,10,5.0],
+["Eye",3,6,2.0],
+["EyeL",3,3,1.0],
+["EyeR",3,3,1.0],
+["Bat",12,12,2.0],
+["Fang",8,8,2.0],
+["FangL",2,4,1.0],
+["Bat",5,5,1.0],
+["FangR",2,4,1.0],
+["Eye",5,5,2.0],
+["Fang",12,12,1.0],
+["FangL",3,6,1.5],
+["FangR",3,6,1.5],
+["Bat",15,15,1.0],
+["Fang",3,3,1.0],
+["Bat",15,15,1.0],
+["Fang",3,3,1.0],
+["EyeL",2,4,2.0],
+["Bat",5,10,1.0],
+["Bat",12,12,2.0],
+["Fang",8,8,2.0],
+["FangL",3,6,1.0],
+["Bat",5,5,1.0],
+["FangR",3,6,1.0],
+["Eye",2,4,2.0],
+["Fang",10,20,2.0],
+["Bat",5,10,2.0],
+["Fang",2,6,2.0],
+["Eye",1,1,2.0],
+["Bat",10,20,3.0],
+["Fang",2,6,2.0],
+["BatL",5,15,2.0],
+["BatR",5,15,2.0],
+["Bat",3,30,1.5],
+["Fang",2,4,3.0],
+["Bat",5,30,1.5],
 ]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
-var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert"]
+var LevelBackground = ["Arctic","Arctic","Arctic","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Continental","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert","Desert"]
 # Space, Continental, Arctic, Desert
 
 var Dialog = [["HQ","Welcome to the Slice, pilot! This is the only settled Tidally Locked Planet in the Colonies."],
-["HQ","Only a small portion of the planet can support life, so you'll see more buildings below you as you get past the arctic."],
+["HQ","Only a small portion of the planet can support life, but its still our home."],
 ["HQ","Some asteroids seem to be entering the atmosphere, so try using them for some target practice."],
-["You","Yes, sir!"],
-["Pause",25],
+["You","Roger that, charging lasers."],
+["Pause",30],
 ["HQ","You should be passing over Nova Poltava - home to plenty of cities and - "],
 ["You","What the hell?"],
-["HQ","INCOMING, INCOMING, INCOMING! Unknown aircraft have started attacking Nova Poltava!"],
+["Civil Defence","INCOMING, INCOMING, INCOMING! Unknown aircraft have started attacking Nova Poltava!"],
+["You","HQ, come in! Please respond!"],
+["Pause",10],
+["Civil Defence","They're getting in-        -are dead. They were torn to pieces and not a drop of blood was left! Please someone help us!"],
 ["Pause",85],
-["HQ","The skies seem to be clearing up, nice job, pilot!"],
-["You","Thank you, sir!"],
+["HQ","Pilot, are you still out there?"],
+["You","Affirmative, HQ. What's attacking us and how is it even night on this side of planet?"],
+["HQ","A race of hemovores, or 'Vampires,' has launched a surprise attack throughout the Colonies."],
+["HQ","They have a starship that appears to be blotting out the Sun to leave us in darkness."],
+["You","How is that even - Nevermind, what's the plan?"],
+["HQ","Once you finish up these last stragglers here on the Slice, we need you to lead a counter attack starting from Bounty."],
+["HQ","With each planet retaken, you'll be one step closer to the center of the system and destroying their flagship."],
+["You","Understood, HQ. This should be the last of them. I'll reroute for Bounty now."]
 ]
 
 var DialogStage = 0
@@ -54,7 +102,7 @@ var finishTime := 0.0
 var Music2Play = "res://Music/On A Mission.mp3"
 
 func _ready() -> void:
-	Globals.PlanetType == "Alive"
+	Globals.PlanetType = "Alive"
 	NextDialog()
 	if LevelBackground[0] == "Space":
 		$TileBackground.visible = false
