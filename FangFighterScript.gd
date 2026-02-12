@@ -7,6 +7,8 @@ var ExplosionParticles = load("res://ExplosionParticles.tscn")
 var Health = 1
 var BulletObj = load("res://Bullet.tscn")
 
+var LabelText = load("res://ScoreLabel.tscn")
+
 func _ready() -> void:
 	velocity = Vector2(Speed * cos(rotation),Speed * sin(rotation))
 	#$AnimatedSprite2D.rotation = randf_range(0,2*PI)
@@ -33,6 +35,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func Damaged():
 	if Health <= 0:
 		$GPUParticles2D.emitting = false
+		var newObj = LabelText.instantiate()
+		newObj.position = global_position
+		newObj.text = ("+" + str($PointValue.value))
+		get_parent().add_child(newObj)
 		queue_free()
 
 func FireBurst():

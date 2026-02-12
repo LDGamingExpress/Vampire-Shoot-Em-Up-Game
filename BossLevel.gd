@@ -28,21 +28,21 @@ var LevelStageEnemies = [["Pause",0,0,5.0],
 var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","You're coming up to the command ship."],
-["HQ","Be careful there are bound to be many enemies in this area."],
-["You","Copy that guns ready."],
+var Dialog = [["HQ","You're coming up on the command ship."],
+["HQ","Be careful. There are bound to be many enemies in this area."],
+["You","Copy that, guns ready."],
 ["Pause",18],
 ["HQ","There it is! Get the r..."],
-["Death","We've taken over your communications surrender now or die."],
+["Death","We've taken over your communications. Surrender now or die."],
 ["You","Never."],
 ["Pause",25],
 ["Death","You won't make it past this."],
 ["Pause",30],
 ["Death","DIE ALREADY!"],
 ["Pause",15],
-["HQ","Communications back online sir. Great, ready the railgun."],
+["HQ","Communications back online, sir. Great, ready the railgun."],
 ["HQ","Railgun ready."],
-["HQ","Now pilot take out the command ship."],
+["HQ","Now, pilot! Take out the command ship."],
 ["You","Copy"],
 ]
 var moveShip = false
@@ -59,7 +59,10 @@ var Explosion = load("res://ExplosionParticles.tscn")
 
 var powerUp = load("res://PowerUp.tscn")
 var time := 0.0
+var time2 := 0.0
 var finishTime := 0.0
+var finishTime2 := 10.0
+var Health = load("res://HealthPickup.tscn")
 
 var Music2Play = "res://Music/On A Mission.mp3"
 
@@ -155,6 +158,7 @@ func SpawnBatR():
 
 func _process(delta: float) -> void:
 	time += delta
+	time2 += delta
 	
 	if time > finishTime:
 		var newObj = powerUp.instantiate()
@@ -163,6 +167,14 @@ func _process(delta: float) -> void:
 		
 		time = 0.0
 		finishTime = randf_range(20.0, 40.0)
+	
+	if time2 > finishTime2:
+		var newObj = Health.instantiate()
+		newObj.position = Vector2(randf_range(-250, 250),-Globals.ScreenSize.y/2)
+		call_deferred("add_child", newObj)
+		
+		time2 = 0.0
+		finishTime2 = randf_range(80.0, 120.0)
 
 func SpawnFangFighter():
 	var newObj = Fang.instantiate()

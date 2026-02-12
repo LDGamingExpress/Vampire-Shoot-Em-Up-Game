@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0cj600k4giwv"]
+
+[ext_resource type="FontFile" uid="uid://n4pml5bwbasg" path="res://Textures/basicpixelfont.ttf" id="1_rjb1p"]
+[ext_resource type="Script" uid="uid://yd5qfiwd4edh" path="res://PowerupLabelScript.gd" id="2_57o8a"]
+
+[sub_resource type="Theme" id="Theme_3ugbc"]
+default_font = ExtResource("1_rjb1p")
+
+[node name="PowerupLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = SubResource("Theme_3ugbc")
+theme_override_colors/font_color = Color(1, 0.80784315, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 0.70980394)
+theme_override_colors/font_outline_color = Color(1, 0.44313726, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+text = "Laser"
+script = ExtResource("2_57o8a")

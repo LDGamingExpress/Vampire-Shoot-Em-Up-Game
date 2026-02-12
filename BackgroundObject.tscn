@@ -67,4 +67,5 @@ animations = [{
 }]
 
 [node name="BackgroundObject" type="AnimatedSprite2D"]
+z_index = -1
 sprite_frames = SubResource("SpriteFrames_no5u6")

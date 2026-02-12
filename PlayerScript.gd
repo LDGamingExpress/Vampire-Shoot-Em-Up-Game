@@ -70,9 +70,13 @@ func Damaged():
 	if Health <= 0:
 		get_parent().get_node("CanvasLayer").get_node("GameUI").Dead()
 	
-	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthBox").get_node("HealthBar").value = Health
-	
+	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthPanel").get_node("HealthBox").get_node("HealthBar").value = Health
 
+func Heal():
+	Health += 5
+	if Health > 10:
+		Health = 10
+	get_parent().get_node("CanvasLayer").get_node("GameUI").get_node("HealthPanel").get_node("HealthBox").get_node("HealthBar").value = Health
 
 func Upgrade(type : String):
 	if type == "None":

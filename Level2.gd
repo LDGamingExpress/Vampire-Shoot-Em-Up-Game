@@ -43,10 +43,14 @@ var Bat = load("res://Bat.tscn")
 var Fang = load("res://FangFighter.tscn")
 var Eye = load("res://SinfulEye.tscn")
 var Explosion = load("res://ExplosionParticles.tscn")
+var Skull = load("res://VengefulSkull.tscn")
 
 var powerUp = load("res://PowerUp.tscn")
 var time := 0.0
+var time2 := 0.0
 var finishTime := 0.0
+var finishTime2 := 10.0
+var Health = load("res://HealthPickup.tscn")
 
 var Music2Play = "res://Music/On A Mission.mp3"
 
@@ -113,6 +117,10 @@ func EnemySpawner():
 				for i in range(0,LevelStageEnemies[Stage][1]):
 					CurrentEnemiesDone += 1
 					SpawnEyeR()
+			"Skull":
+				for i in range(0,LevelStageEnemies[Stage][1]):
+					CurrentEnemiesDone += 1
+					SpawnSkull()
 		await get_tree().create_timer(LevelStageEnemies[Stage][3]).timeout
 		EnemySpawner()
 
@@ -142,6 +150,7 @@ func SpawnBatR():
 
 func _process(delta: float) -> void:
 	time += delta
+	time2 += delta
 	
 	if time > finishTime:
 		var newObj = powerUp.instantiate()
@@ -150,6 +159,14 @@ func _process(delta: float) -> void:
 		
 		time = 0.0
 		finishTime = randf_range(20.0, 40.0)
+	
+	if time2 > finishTime2:
+		var newObj = Health.instantiate()
+		newObj.position = Vector2(randf_range(-250, 250),-Globals.ScreenSize.y/2)
+		call_deferred("add_child", newObj)
+		
+		time2 = 0.0
+		finishTime2 = randf_range(80.0, 120.0)
 
 func SpawnFangFighter():
 	var newObj = Fang.instantiate()
@@ -185,6 +202,12 @@ func SpawnEyeR():
 	var newObj = Eye.instantiate()
 	newObj.position = Vector2(randf_range(0,Globals.ScreenSize.x/2.0),-Globals.ScreenSize.y/2)
 	newObj.rotation = 3*PI/4
+	call_deferred("add_child",newObj)
+
+func SpawnSkull():
+	var newObj = Skull.instantiate()
+	newObj.position = Vector2(randf_range(-Globals.ScreenSize.x/4.5,Globals.ScreenSize.x/4.5),-Globals.ScreenSize.y/2)
+	newObj.rotation = PI/2
 	call_deferred("add_child",newObj)
 
 func NextDialog():

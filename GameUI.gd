@@ -3,7 +3,7 @@ var score = 0
 var paused = false
 
 func _ready() -> void:
-	$ScorePanel/HighScore.text = "High Score: " + str(Globals.HighScores[Globals.currentLevel])
+	$ScorePanel/HBoxContainer/HighScore.text = "High Score: " + str(Globals.HighScores[Globals.currentLevel])
 	
 	$PauseMenu/QuitButton.pressed.connect(menu_button_click.bind("Quit"))
 	$PauseMenu/ResumeButton.pressed.connect(menu_button_click.bind("Resume"))
@@ -23,11 +23,11 @@ func _ready() -> void:
 
 func add_score(scoreToAdd : int):
 	score += scoreToAdd
-	$ScorePanel/Score.text = "Score: " + str(score)
+	$ScorePanel/HBoxContainer/Score.text = "Score: " + str(score)
 	
 	if score > Globals.HighScores[Globals.currentLevel]:
 		Globals.HighScores[Globals.currentLevel] = score
-		$ScorePanel/HighScore.text = "High Score: " + str(score)
+		$ScorePanel/HBoxContainer/HighScore.text = "High Score: " + str(score)
 
 func _input(event: InputEvent) -> void:
 	if InputEvent and event.is_action_pressed("Pause"):

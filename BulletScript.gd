@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	
 	if currentTarget != null:
-		var dir = (currentTarget.position - position).normalized()
+		var dir = (currentTarget.global_position - position).normalized()
 		rotation = dir.angle()
 		velocity = dir * (Speed - 200)
 
@@ -84,4 +84,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func BulletAreaEntered(body: Node2D) -> void:
 	if body.Team != Team and currentTarget == null:
-		currentTarget = body
+		if !body.is_in_group("Skull"):
+			currentTarget = body
+		else:
+			if body.CanDamage:
+				currentTarget = body

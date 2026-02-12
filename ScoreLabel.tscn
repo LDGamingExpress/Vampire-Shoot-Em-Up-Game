@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd5bir8ehy8c6"]
+
+[ext_resource type="FontFile" uid="uid://n4pml5bwbasg" path="res://Textures/basicpixelfont.ttf" id="1_brs5d"]
+[ext_resource type="Script" uid="uid://yuwbesha8g24" path="res://ScoreLabelScript.gd" id="2_1ucnw"]
+
+[sub_resource type="Theme" id="Theme_pskav"]
+default_font = ExtResource("1_brs5d")
+
+[node name="ScoreLabel" type="Label"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_horizontal = 4
+theme = SubResource("Theme_pskav")
+theme_override_colors/font_color = Color(0, 0.49019608, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.70980394)
+theme_override_colors/font_outline_color = Color(0.07450981, 0.06666667, 0.36078432, 0.6901961)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+text = "+100"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_1ucnw")

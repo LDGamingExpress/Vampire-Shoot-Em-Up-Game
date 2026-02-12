@@ -51,6 +51,7 @@ script = ExtResource("1_uijts")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dpjfm")
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_luidn")
@@ -58,10 +59,27 @@ shape = SubResource("CircleShape2D_luidn")
 [node name="GunPoints" type="Node2D" parent="."]
 
 [node name="Node2D" type="Node2D" parent="GunPoints"]
-position = Vector2(13, -8.5)
+position = Vector2(14, 0.5)
 
 [node name="Node2D2" type="Node2D" parent="GunPoints"]
-position = Vector2(13, 8.5)
+position = Vector2(26, 0)
+
+[node name="Node2D3" type="Node2D" parent="GunPoints"]
+position = Vector2(26, -6)
+
+[node name="Node2D4" type="Node2D" parent="GunPoints"]
+position = Vector2(26, 6)
+
+[node name="Node2D5" type="Node2D" parent="GunPoints"]
+position = Vector2(21, 0)
+
+[node name="Node2D6" type="Node2D" parent="GunPoints"]
+position = Vector2(15, -14)
+rotation = -0.7853982
+
+[node name="Node2D7" type="Node2D" parent="GunPoints"]
+position = Vector2(15, 14)
+rotation = 0.7853982
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -71,8 +89,7 @@ autostart = true
 visible = false
 offset_right = 8.0
 offset_bottom = 16.0
-max_value = 500.0
-value = 200.0
+value = 50.0
 
 [node name="Area2D2" type="Area2D" parent="."]
 

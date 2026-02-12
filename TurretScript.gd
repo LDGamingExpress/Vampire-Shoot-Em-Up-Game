@@ -25,18 +25,39 @@ func _ready() -> void:
 			$Timer.wait_time = 0.8
 			Health = 5
 			$CollisionShape2D.shape.radius = 5.0
+			$GunPoints/Node2D2.queue_free()
+			$GunPoints/Node2D3.queue_free()
+			$GunPoints/Node2D4.queue_free()
+			$GunPoints/Node2D5.queue_free()
+			$GunPoints/Node2D6.queue_free()
+			$GunPoints/Node2D7.queue_free()
 		2:
 			$Timer.wait_time = 0.8
 			Health = 10
 			$CollisionShape2D.shape.radius = 11.0
+			$GunPoints/Node2D.queue_free()
+			$GunPoints/Node2D3.queue_free()
+			$GunPoints/Node2D4.queue_free()
+			$GunPoints/Node2D5.queue_free()
+			$GunPoints/Node2D6.queue_free()
+			$GunPoints/Node2D7.queue_free()
 		3:
 			$Timer.wait_time = 1.2
 			Health = 10
 			$CollisionShape2D.shape.radius = 11.0
+			$GunPoints/Node2D.queue_free()
+			$GunPoints/Node2D2.queue_free()
+			$GunPoints/Node2D5.queue_free()
+			$GunPoints/Node2D6.queue_free()
+			$GunPoints/Node2D7.queue_free()
 		4:
 			$Timer.wait_time = 0.9
 			Health = 10
 			$CollisionShape2D.shape.radius = 11.0
+			$GunPoints/Node2D.queue_free()
+			$GunPoints/Node2D2.queue_free()
+			$GunPoints/Node2D3.queue_free()
+			$GunPoints/Node2D4.queue_free()
 
 func _physics_process(delta: float) -> void:
 	match Type:
@@ -94,19 +115,21 @@ func FireBurst():
 		var newBullet = BulletObj.instantiate()
 		newBullet.position = $GunPoints.get_child(i).global_position
 		newBullet.Frame = 0
-		newBullet.rotation = global_rotation
+		newBullet.rotation = $GunPoints.get_child(i).global_rotation
 		newBullet.Team = "Enemy"
 		newBullet.modulate = Color(1.0, 0.0, 0.102, 0.725)
 		if Type == 4:
 			newBullet.Frame = 4
 		if Type == 2:
 			newBullet.Damage = 3
+			newBullet.Frame = 2
 		if Type == 3:
 			newBullet.Damage = 2
 		get_parent().get_parent().get_parent().add_child(newBullet)
 
 func _on_timer_timeout() -> void:
-	FireBurst()
+	if $VisibleOnScreenNotifier2D.is_on_screen():
+		FireBurst()
 
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

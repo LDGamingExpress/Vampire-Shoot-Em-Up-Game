@@ -32,7 +32,10 @@ var Skull = load("res://VengefulSkull.tscn")
 
 var powerUp = load("res://PowerUp.tscn")
 var time := 0.0
+var time2 := 0.0
 var finishTime := 0.0
+var finishTime2 := 10.0
+var Health = load("res://HealthPickup.tscn")
 
 func _ready() -> void:
 	NextDialog()
@@ -126,6 +129,7 @@ func SpawnBatR():
 
 func _process(delta: float) -> void:
 	time += delta
+	time2 += delta
 	
 	if time > finishTime:
 		var newObj = powerUp.instantiate()
@@ -134,6 +138,14 @@ func _process(delta: float) -> void:
 		
 		time = 0.0
 		finishTime = randf_range(20.0, 40.0)
+	
+	if time2 > finishTime2:
+		var newObj = Health.instantiate()
+		newObj.position = Vector2(randf_range(-250, 250),-Globals.ScreenSize.y/2)
+		call_deferred("add_child", newObj)
+		
+		time2 = 0.0
+		finishTime2 = randf_range(80.0, 120.0)
 
 func SpawnFangFighter():
 	var newObj = Fang.instantiate()
