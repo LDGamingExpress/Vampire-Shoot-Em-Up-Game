@@ -31,7 +31,7 @@ autoplay = true
 
 [node name="Boss" parent="." instance=ExtResource("5_0twmt")]
 position = Vector2(0, -445)
-rotation = 1.5707964
+rotation = 1.5708
 
 [node name="BackgroundObjects" type="Node2D" parent="."]
 script = ExtResource("2_p84dd")

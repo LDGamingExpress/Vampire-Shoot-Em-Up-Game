@@ -52,7 +52,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				
 				var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
 				
-				if Team == "Player":
+				if Team == "Player" and body.Team != "Boss":
 					UI.add_score(body.get_node("PointValue").value)
 				
 				if Globals.PowerUp != "Laser":
