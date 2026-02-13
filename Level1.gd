@@ -19,19 +19,19 @@ var LevelStageEnemies = [["Pause",0,0,50.0],
 ["Bat",15,15,1.0],
 ["BatL",6,6,2.0],
 ["BatR",6,6,10.0],
-["Eye",2,4,2.0],
-["Fang",10,10,2.0],
+["Eye",1,2,2.0],
+["Fang",6,6,2.0],
 ["BatL",10,10,1.0],
 ["BatR",10,10,5.0],
-["Eye",3,6,2.0],
-["EyeL",3,3,1.0],
-["EyeR",3,3,1.0],
+["Eye",2,4,2.0],
+["EyeL",1,1,1.0],
+["EyeR",1,1,1.0],
 ["Bat",12,12,2.0],
 ["Fang",8,8,2.0],
 ["FangL",2,4,1.0],
 ["Bat",5,5,1.0],
 ["FangR",2,4,1.0],
-["Eye",4,4,2.0],
+["Eye",3,3,2.0],
 ["Fang",12,12,1.0],
 ["FangL",3,6,1.5],
 ["FangR",3,6,1.5],
@@ -177,7 +177,7 @@ func EnemySpawner():
 		await get_tree().create_timer(LevelStageEnemies[Stage][3]).timeout
 		EnemySpawner()
 	elif $CanvasLayer/GameUI/CompleteLevel.visible == false:
-		await get_tree().create_timer(10).timeout
+		await get_tree().create_timer(20).timeout
 		$CanvasLayer/GameUI.EndLevel()
 
 func SpawnAsteroid():
@@ -222,7 +222,7 @@ func _process(delta: float) -> void:
 		call_deferred("add_child", newObj)
 		
 		time2 = 0.0
-		finishTime2 = randf_range(80.0, 120.0)
+		finishTime2 = randf_range(60.0, 100.0)
 
 func SpawnFangFighter():
 	var newObj = Fang.instantiate()

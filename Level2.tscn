@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="3_nc7oo"]
 [ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="4_6x3wt"]
 [ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="5_3453u"]
-[ext_resource type="AudioStream" uid="uid://c7kuig6wqd3k6" path="res://Music/Darkness of Space.mp3" id="7_nc7oo"]
+[ext_resource type="AudioStream" uid="uid://c0dp2b5xk8arq" path="res://Music/Hard Drive.mp3" id="7_nc7oo"]
 [ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="8_nc7oo"]
 
 [node name="Level2" type="Node2D"]

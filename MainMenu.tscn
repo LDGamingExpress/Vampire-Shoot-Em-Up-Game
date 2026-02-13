@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://gutulmqt4ifm"]
+[gd_scene load_steps=17 format=4 uid="uid://gutulmqt4ifm"]
 
 [ext_resource type="Theme" uid="uid://bgv6pguoxu4le" path="res://Textures/BasicTheme.tres" id="1_7r1g0"]
 [ext_resource type="Script" uid="uid://duklbdw0elhnu" path="res://MainMenu.gd" id="1_i26rj"]
@@ -6,8 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="3_qoqlk"]
 [ext_resource type="Texture2D" uid="uid://c1eduongod5a6" path="res://Textures/HQPortrait.png" id="4_iwfq2"]
 [ext_resource type="Texture2D" uid="uid://dwhv715hqufh8" path="res://Textures/PilotPortrait.png" id="5_7r1g0"]
+[ext_resource type="AudioStream" uid="uid://c7kuig6wqd3k6" path="res://Music/Darkness of Space.mp3" id="7_cqjrg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjwba"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cqjrg"]
+font_size = 48
+outline_size = 5
+outline_color = Color(0.69803923, 0.69803923, 0.69803923, 0.64705884)
+shadow_size = 5
+shadow_color = Color(0.19607843, 0.19607843, 0.19607843, 0.5921569)
+shadow_offset = Vector2(3, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtmkw"]
 atlas = ExtResource("3_qoqlk")
@@ -616,73 +625,63 @@ grow_horizontal = 2
 text = "Keyboard Controls"
 
 [node name="MainButtons" type="Control" parent="MenuUI"]
+z_index = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayButton" type="Button" parent="MenuUI/MainButtons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuUI/MainButtons"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -100.0
-offset_right = 30.0
-offset_bottom = -60.0
+offset_left = -120.0
+offset_top = -133.5
+offset_right = 120.0
+offset_bottom = 133.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="MenuUI/MainButtons/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_7r1g0")
+theme_override_font_sizes/font_size = 48
+text = "Attack of the 
+Space Vampires"
+label_settings = SubResource("LabelSettings_cqjrg")
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="MenuUI/MainButtons/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "Play
 "
 
-[node name="SettingsButton" type="Button" parent="MenuUI/MainButtons"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -40.0
-offset_right = 30.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SettingsButton" type="Button" parent="MenuUI/MainButtons/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "Settings
 "
 
-[node name="LevelsButton" type="Button" parent="MenuUI/MainButtons"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 20.0
-offset_right = 30.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="LevelsButton" type="Button" parent="MenuUI/MainButtons/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "Levels
 "
 
-[node name="QuitButton" type="Button" parent="MenuUI/MainButtons"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 80.0
-offset_right = 30.0
-offset_bottom = 120.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="QuitButton" type="Button" parent="MenuUI/MainButtons/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 text = "Quit
 "
@@ -719,6 +718,11 @@ zoom = Vector2(1.75, 1.75)
 tile_map_data = PackedByteArray("AAD4/wcAAgAHAAAAAAAMAAUAAgAIAAYAAAAMAAYAAgAIAAcAAAAMAAcAAgAIAAgAAAANAAUAAgAJAAYAAAANAAYAAgAJAAcAAAANAAcAAgAJAAgAAAAOAAUAAgAKAAYAAAAOAAYAAgAKAAcAAAAOAAcAAgAKAAgAAAAJAAMAAgAJAAoAAAAJAAQAAgAJAAsAAAAKAAMAAgAKAAoAAAAKAAQAAgAKAAsAAAALAAMAAgALAAoAAAALAAQAAgALAAsAAAD5/wMAAgAIAAEAAAD3////AgAIAAEAAAD+//z/AgAIAAEAAADy//r/AgAIAAEAAAD6/wAAAgAKAAEAAAACAP3/AgAFAAwAAAAEAAEAAgALAAEAAAAKAP//AgANAAEAAAAHAPj/AgAJAAEAAAANAPb/AgAMAAEAAAAQAPn/AgANAAEAAAD8//f/AgAMAAEAAAD2//b/AgAMAAEAAADw//3/AgAIAAEAAADu/wIAAgAJAAEAAAD0/wIAAgANAAEAAAD0//v/AgAMAAEAAADz/wgAAgATAAEAAAD7/wgAAgAMAAEAAAD1/woAAgAJAAEAAADt/woAAgAOAAEAAADz/wQAAgAIAAEAAAADAAgAAgAMAAEAAAAEAAoAAgAJAAEAAAALAAcAAgAJAAEAAAABAAUAAgALAAEAAAD+/wkAAgAMAAEAAAAGAAMAAgANAAEAAAAOAAIAAgAIAAEAAAASAAcAAgALAAEAAAAPAP7/AgALAAEAAAAFAPz/AgAIAAsAAAADAPj/AgAMAAEAAAD6//v/AgALAAEAAAD4//n/AgAOAAEAAAD8//z/AgALAAEAAAAAAPf/AgAJAAEAAADy/wcAAgASAAAAAADy/wgAAgASAAEAAADz/wcAAgATAAAAAADw/wgAAgAIAAEAAAACAPv/AgAFAAoAAAACAPz/AgAFAAsAAAACAP7/AgAFAA0AAAADAPv/AgAGAAoAAAADAPz/AgAGAAsAAAADAP3/AgAGAAwAAAADAP7/AgAGAA0AAAAEAPv/AgAHAAoAAAAEAPz/AgAHAAsAAAAEAP3/AgAHAAwAAAAEAP7/AgAHAA0AAAAFAPv/AgAIAAoAAAAFAP3/AgAIAAwAAAAFAP7/AgAIAA0AAAAJAP3/AgAJAAEAAAANAPn/AgAKAAEAAAANAPv/AgAJAAEAAAAJAPn/AgAMAAEAAAALAP3/AgAHAAIAAAALAP7/AgAHAAMAAAAMAP3/AgAIAAIAAAAMAP7/AgAIAAMAAADy/wAAAgAJAAEAAADx/wMAAgANAAEAAADx/wYAAgALAAEAAAD5//n/AgABABAAAAD5//r/AgABABEAAAD6//n/AgACABAAAAD6//r/AgACABEAAAD7//n/AgADABAAAAD7//r/AgADABEAAAD8//n/AgAEABAAAAD8//r/AgAEABEAAAA=")
 tile_set = SubResource("TileSet_u7cqb")
 
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_cqjrg")
+autoplay = true
+
 [connection signal="value_changed" from="MenuUI/SettingsPanel/AudioSlider" to="MenuUI" method="volume_changed"]
 [connection signal="toggled" from="MenuUI/SettingsPanel/ControlsSlider" to="MenuUI" method="control_slider_toggle"]
 [connection signal="timeout" from="FangFighter/Timer" to="FangFighter" method="_on_timer_timeout"]
+[connection signal="finished" from="MusicPlayer" to="MenuUI" method="_on_music_player_finished"]

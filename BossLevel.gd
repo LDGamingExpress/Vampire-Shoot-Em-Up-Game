@@ -64,7 +64,7 @@ var finishTime := 0.0
 var finishTime2 := 10.0
 var Health = load("res://HealthPickup.tscn")
 
-var Music2Play = "res://Music/On A Mission.mp3"
+var Music2Play = "res://Music/Emissary From Hell.mp3"
 
 func _ready() -> void:
 	Globals.PlanetType = "Alive"

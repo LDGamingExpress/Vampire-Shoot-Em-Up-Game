@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Vampire Shoot Em Up Game"
+config/name="Attack of the Space Vampires"
+config/description="A race of SPACE VAMPIRES has laid siege to the Colonies and blotted out the Sun with a colossal starship. Only a lone pilot can free the solar system and take the fight all the way to their flagship!"
 run/main_scene="uid://gutulmqt4ifm"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://d1086rcoyfkwu"
 
 [autoload]
 

@@ -24,13 +24,13 @@ var LevelStageEnemies = [["Pause",0,0,10.0],
 var LevelBackground = ["Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space","Space"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","Welcome to the final fronteir."],
+var Dialog = [["HQ","Welcome to the final frontier."],
 ["HQ","The autopilot has been programmed to take you to the inner system."],
-["HQ","Remember theres no help out here so stay safe and godspeed."],
+["HQ","Remember there's no help out here so stay safe and godspeed."],
 ["You","Copy."],
 ["Pause",85],
-["HQ","Good you've made it. Now get down there and do what you do best."],
-["You","Roger Roger."],
+["HQ","Good, you've made it. Now get down there and clear Bounty's skies."],
+["You","Understood, HQ."],
 ]
 var movePlanet = false
 
@@ -52,7 +52,7 @@ var finishTime := 0.0
 var finishTime2 := 10.0
 var Health = load("res://HealthPickup.tscn")
 
-var Music2Play = "res://Music/On A Mission.mp3"
+var Music2Play = "res://Music/Hard Drive.mp3"
 
 func _ready() -> void:
 	Globals.PlanetType = "Alive"

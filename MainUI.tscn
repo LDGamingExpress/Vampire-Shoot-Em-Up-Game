@@ -478,5 +478,7 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
+[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="value_changed" from="PauseMenu/AudioSlider" to="." method="audio_changed"]
 [connection signal="toggled" from="PauseMenu/ControlsSlider" to="." method="control_slider_toggle"]

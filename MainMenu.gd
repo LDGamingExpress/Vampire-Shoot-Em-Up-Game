@@ -1,10 +1,10 @@
 extends Control
 
 func _ready() -> void:
-	$MainButtons/PlayButton.pressed.connect(menu_button_click.bind("Play"))
-	$MainButtons/LevelsButton.pressed.connect(menu_button_click.bind("Levels"))
-	$MainButtons/SettingsButton.pressed.connect(menu_button_click.bind("Settings"))
-	$MainButtons/QuitButton.pressed.connect(menu_button_click.bind("Quit"))
+	$MainButtons/VBoxContainer/PlayButton.pressed.connect(menu_button_click.bind("Play"))
+	$MainButtons/VBoxContainer/LevelsButton.pressed.connect(menu_button_click.bind("Levels"))
+	$MainButtons/VBoxContainer/SettingsButton.pressed.connect(menu_button_click.bind("Settings"))
+	$MainButtons/VBoxContainer/QuitButton.pressed.connect(menu_button_click.bind("Quit"))
 	
 	$LevelsPanel/Level1.pressed.connect(select_level.bind(0))
 	$LevelsPanel/Level2.pressed.connect(select_level.bind(1))
@@ -47,3 +47,7 @@ func control_slider_toggle(toggled_on: bool) -> void:
 
 func volume_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value - 80.0)
+
+
+func _on_music_player_finished() -> void:
+	get_parent().get_node("MusicPlayer").play()

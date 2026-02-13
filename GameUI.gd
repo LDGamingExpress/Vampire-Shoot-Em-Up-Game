@@ -32,11 +32,17 @@ func add_score(scoreToAdd : int):
 func _input(event: InputEvent) -> void:
 	if InputEvent and event.is_action_pressed("Pause"):
 		paused = !paused
+		$MenuMusicPlayer.stream = load("res://Music/System.mp3")
 		toggle_pause()
 
 func toggle_pause():
 	$PauseMenu.visible = paused
+	if paused:
+		$MenuMusicPlayer.play()
+	else:
+		$MenuMusicPlayer.stop()
 	get_tree().paused = paused
+
 
 func menu_button_click(button : String):
 	if button == "Resume":
@@ -57,6 +63,7 @@ func menu_button_click(button : String):
 	elif button == "Next":
 		get_parent().get_parent().get_node("SaveSystem").SaveData()
 		paused = false
+		toggle_pause()
 		Globals.currentLevel += 1
 		Globals.LoadLevel()
 
@@ -70,11 +77,15 @@ func EndLevel():
 	get_tree().paused = true
 	$CompleteLevel/ScoreText.text = "Score: " + str(score)
 	$CompleteLevel.visible = true
+	$MenuMusicPlayer.stream = load("res://Music/Return Alive.mp3")
+	$MenuMusicPlayer.play()
 
 func Dead():
 	get_tree().paused = true
 	$DeathScreen/ScoreText.text = "Score: " + str(score)
 	$DeathScreen.visible = true
+	$MenuMusicPlayer.stream = load("res://Music/End of the Light.mp3")
+	$MenuMusicPlayer.play()
 
 func NewDialog(Speaker,Text):
 	if Speaker == "You":
