@@ -27,8 +27,9 @@ func onEntered(body: Node2D) -> void:
 		get_parent().add_child(newObj)
 		
 		await get_tree().create_timer(15.0).timeout
-		body.Upgrade("None")
-		queue_free()
+		if Globals.PowerUp == powerUp:
+			body.Upgrade("None")
+			queue_free()
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()

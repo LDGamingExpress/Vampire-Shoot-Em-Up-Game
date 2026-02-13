@@ -279,23 +279,26 @@ func NextDialog():
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
 	if DialogStage == 6:
-		await get_tree().create_timer(3.5).timeout
-		Music2Play = "res://Music/Invasion.mp3"
-		Globals.PlanetType = "Dead"
-		var tween = get_tree().create_tween()
-		tween.tween_property($MusicPlayer, "volume_linear", 0.0, 0.8)
-		await get_tree().create_timer(0.8).timeout
-		_on_music_player_finished()
-		var tween2 = get_tree().create_tween()
-		tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(5.1).timeout
+		MusicChange()
 		for i in range(0,35):
 			var NewObj = Explosion.instantiate()
 			NewObj.position = Vector2(randf_range(-Globals.ScreenSize.x/4.0,Globals.ScreenSize.x/4.0),randf_range(-Globals.ScreenSize.y/4.0,Globals.ScreenSize.y/4.0))
 			add_child(NewObj)
 			await get_tree().create_timer(randf_range(0.1,0.5)).timeout
-		Music2Play = "res://Music/Fallen Souls.mp3"
 
+func MusicChange():
+	await get_tree().create_timer(0.5).timeout
+	Music2Play = "res://Music/Invasion.mp3"
+	Globals.PlanetType = "Dead"
+	var tween = get_tree().create_tween()
+	tween.tween_property($MusicPlayer, "volume_linear", 0.0, 0.8)
+	await get_tree().create_timer(0.8).timeout
+	_on_music_player_finished()
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
+	await get_tree().create_timer(0.8).timeout
+	Music2Play = "res://Music/Fallen Souls.mp3"
 
 func _on_music_player_finished() -> void:
 	$MusicPlayer.stream = load(Music2Play)
