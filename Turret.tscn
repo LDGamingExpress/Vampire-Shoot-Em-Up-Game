@@ -45,7 +45,7 @@ radius = 30.265491
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmc2m"]
 radius = 800.0
 
-[node name="Turret" type="CharacterBody2D"]
+[node name="Turret" type="CharacterBody2D" groups=["Turrets"]]
 collision_mask = 0
 script = ExtResource("1_uijts")
 

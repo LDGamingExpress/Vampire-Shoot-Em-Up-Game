@@ -10,7 +10,7 @@ var SFXObj = load("res://SFXObject.tscn")
 var currentTarget = null
 
 func _ready() -> void:
-	if Team == "Player" and Globals.PowerUp == "Laser":
+	if Team == "Player" and Globals.PowerUp == "Gauss":
 		Speed *= 2
 	elif Team == "Boss":
 		Speed *= 2
@@ -21,7 +21,7 @@ func _ready() -> void:
 	newSFX.stream = load("res://SFX/LaserSoundEffect.mp3")
 	newSFX.position = position
 	
-	if Team == "Player" and Globals.PowerUp == "Laser":
+	if Team == "Player" and Globals.PowerUp == "Gauss":
 		newSFX.pitch_scale = randf_range(0.60, 0.90)
 		$Area2D/CollisionShape2D.scale = Vector2(1.5,1.5)
 	elif Team == "Boss":
@@ -55,9 +55,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				if Team == "Player" and body.Team != "Boss":
 					UI.add_score(body.get_node("PointValue").value)
 				
-				if Globals.PowerUp != "Laser":
+				if Globals.PowerUp != "Gauss":
 					queue_free()
-				elif Globals.PowerUp == "Laser":
+				elif Globals.PowerUp == "Gauss":
 					if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
 						queue_free()
 			elif body.is_in_group("Skull"):
@@ -73,9 +73,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 					if Team == "Player":
 						UI.add_score(body.get_node("PointValue").value)
 					
-					if Globals.PowerUp != "Laser":
+					if Globals.PowerUp != "Gauss":
 						queue_free()
-					elif Globals.PowerUp == "Laser":
+					elif Globals.PowerUp == "Gauss":
 						if position.y > Globals.ScreenSize.y/2 or position.y < -Globals.ScreenSize.y/2:
 							queue_free()
 	else:

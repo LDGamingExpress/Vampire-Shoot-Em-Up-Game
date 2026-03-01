@@ -4,6 +4,7 @@ var BulletObj = load("res://Bullet.tscn")
 var CanShoot = true
 var Health = 10
 var Team = "Player"
+var ExplosionParticles = load("res://ExplosionParticles.tscn")
 
 var gunPoint = load("res://GunPoint.tscn")
 
@@ -18,6 +19,45 @@ func _process(_delta: float) -> void:
 		position = MousePos
 	else:
 		position = Vector2(lerp(position.x,MousePos.x,50/posDif),lerp(position.y,MousePos.y,50/posDif))
+	
+	if Globals.PowerUp == "Laser":
+		$LaserCast.enabled = true
+		$LaserLine.visible = true
+		$LaserParticles.emitting = true
+	else:
+		$LaserCast.enabled = false
+		$LaserLine.visible = false
+		$LaserParticles.emitting = false
+
+	if $LaserCast.is_colliding():
+		if $LaserCast.get_collider() != null:
+			var body = $LaserCast.get_collider()
+			if body.Team != Team:
+				if !body.is_in_group("Skull"):
+					body.Health -= 0.1
+					body.Damaged()
+					var newObj = ExplosionParticles.instantiate()
+					newObj.position = body.global_position
+					get_parent().add_child(newObj)
+					
+					var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+					
+					if Team == "Player" and body.Team != "Boss":
+						UI.add_score(body.get_node("PointValue").value)
+				elif body.is_in_group("Skull"):
+					if body.CanDamage:
+						body.Health -= 0.1
+						body.Damaged()
+						var newObj = ExplosionParticles.instantiate()
+						newObj.position = body.global_position
+						get_parent().add_child(newObj)
+						
+						var UI = get_parent().get_node("CanvasLayer").get_node("GameUI")
+						
+						if Team == "Player":
+							UI.add_score(body.get_node("PointValue").value)
+					else:
+						$LaserCast.add_exception(body)
 	
 	if Input.is_action_pressed("Shoot") and CanShoot and Globals.PowerUp != "Railgun":
 		CanShoot = false
@@ -35,12 +75,12 @@ func _process(_delta: float) -> void:
 				newBullet.Frame = 1
 			if Globals.PowerUp == "Spread":
 				newBullet.Frame = 2
-			if Globals.PowerUp == "Laser":
+			if Globals.PowerUp == "Gauss":
 				newBullet.modulate = Color(0.102, 0.878, 1.0, 0.725)
 				newBullet.get_node("AnimatedSprite2D").scale = Vector2(3.0, 0.8)
 			get_parent().add_child(newBullet)
 		
-		if Globals.PowerUp == "Laser" or Globals.PowerUp == "Missile":
+		if Globals.PowerUp == "Gauss" or Globals.PowerUp == "Missile":
 			Reload(0.8)
 		elif Globals.PowerUp == "Spread":
 			Reload(0.2)
