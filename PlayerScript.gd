@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 		$LaserCast.enabled = false
 		$LaserLine.visible = false
 		$LaserParticles.emitting = false
-
+	
 	if $LaserCast.is_colliding():
 		if $LaserCast.get_collider() != null:
 			var body = $LaserCast.get_collider()

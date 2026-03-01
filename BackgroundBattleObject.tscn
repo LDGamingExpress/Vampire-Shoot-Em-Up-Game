@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://bubid1oesnd2q"]
+
+[ext_resource type="Script" uid="uid://b10cry70n3b4p" path="res://BackgroundBattleObjectScript.gd" id="1_1qc2w"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_8qgbs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iga1x"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dasc"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg8tc"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1dlx"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o41t"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(512, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4iqc"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(544, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc0nh"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(544, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1l0e"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saiw5"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(160, 512, 160, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qc2w"]
+atlas = ExtResource("2_8qgbs")
+region = Rect2(64, 448, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g5vjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iga1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dasc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg8tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1dlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o41t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4iqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc0nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1l0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saiw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qc2w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BackgroundBattleObject" type="CharacterBody2D"]
+script = ExtResource("1_1qc2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_g5vjh")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

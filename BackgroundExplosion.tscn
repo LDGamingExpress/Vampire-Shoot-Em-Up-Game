@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://tj5qmm6p7kd6"]
+
+[ext_resource type="Script" uid="uid://dg8quqrnscgxh" path="res://BackgroundExplosion.gd" id="1_7chps"]
+
+[sub_resource type="Gradient" id="Gradient_jl3bp"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.25333333, 0.36666667, 1)
+colors = PackedColorArray(1, 0.63529414, 0, 0.7529412, 0.82914084, 0.35209873, 0, 0.54713726, 0.1986571, 0.083358064, 0, 0.14957708, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_37tx1"]
+gradient = SubResource("Gradient_jl3bp")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.47663552, 0.47196263)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_kfj16"]
+offsets = PackedFloat32Array(0.018867925, 1)
+colors = PackedColorArray(6.34502, 6.34502, 6.34502, 1, 15.863711, 15.863711, 15.863711, 0.4509804)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lpvuc"]
+gradient = SubResource("Gradient_kfj16")
+
+[sub_resource type="Curve" id="Curve_sdjpg"]
+_data = [Vector2(0, 1), 0.0, 3.244382, 0, 0, Vector2(1, 0), -3.4297771, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_34k2a"]
+curve = SubResource("Curve_sdjpg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7chps"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 110.0
+gravity = Vector3(0, 120, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_34k2a")
+color_ramp = SubResource("GradientTexture1D_lpvuc")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.29999998
+
+[node name="BackgroundExplosion" type="GPUParticles2D"]
+texture_filter = 1
+emitting = false
+amount = 15
+texture = SubResource("GradientTexture2D_37tx1")
+lifetime = 0.15000000000000002
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_7chps")
+script = ExtResource("1_7chps")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://x8kbddt3xwd6"]
+
+[ext_resource type="Script" uid="uid://bnljk64cgd0b5" path="res://Level4.gd" id="1_cgold"]
+[ext_resource type="Script" uid="uid://c3xso6t37phfm" path="res://DataSaves.gd" id="2_evb8c"]
+[ext_resource type="Script" uid="uid://dywe8c8emboin" path="res://BackgroundObjectsScript.gd" id="3_yqqjl"]
+[ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="4_gkwbp"]
+[ext_resource type="Script" uid="uid://c44gqdkoiitlc" path="res://BackgroundBattle.gd" id="4_yqqjl"]
+[ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="5_nj7ao"]
+[ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="6_1ug64"]
+[ext_resource type="AudioStream" uid="uid://ctatg7t1cwi5s" path="res://Music/Throbbing Heart.mp3" id="8_yqqjl"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="9_gkwbp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj7ao"]
+atlas = ExtResource("9_gkwbp")
+region = Rect2(352, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ug64"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj7ao")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg50l"]
+atlas = ExtResource("9_gkwbp")
+region = Rect2(160, 320, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbmc8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg50l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Level4" type="Node2D"]
+script = ExtResource("1_cgold")
+
+[node name="SaveSystem" type="Node2D" parent="."]
+script = ExtResource("2_evb8c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="BackgroundObjects" type="Node2D" parent="."]
+script = ExtResource("3_yqqjl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 43)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_1ug64")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.0000153, 47)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_cbmc8")
+
+[node name="BackgroundBattle" type="Node2D" parent="."]
+script = ExtResource("4_yqqjl")
+
+[node name="ShipTimer" type="Timer" parent="BackgroundBattle"]
+wait_time = 3.0
+autostart = true
+
+[node name="ExplosionTimer" type="Timer" parent="BackgroundBattle"]
+wait_time = 1.5
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("4_gkwbp")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("5_nj7ao")]
+
+[node name="TileBackground" parent="." instance=ExtResource("6_1ug64")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_yqqjl")
+autoplay = true
+
+[connection signal="timeout" from="BackgroundBattle/ShipTimer" to="BackgroundBattle" method="_on_ship_timer_timeout"]
+[connection signal="timeout" from="BackgroundBattle/ExplosionTimer" to="BackgroundBattle" method="_on_explosion_timer_timeout"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
