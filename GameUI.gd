@@ -103,6 +103,6 @@ func NewDialog(Speaker,Text):
 	tween.tween_property($DialogPanel/DialogContainer/TextContainer/DialogBox,"visible_ratio",1.0,float(len(Text)) * 0.075)
 	#tween.tween_callback(get_parent().get_parent().NextDialog())
 	#print(float(len(Text)) * 0.2)
-	await get_tree().create_timer(float(len(Text)) * 0.2).timeout
+	await get_tree().create_timer(float(len(Text)) * 0.2,false).timeout
 	#print("Bloop2")
 	get_parent().get_parent().NextDialog()

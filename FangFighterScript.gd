@@ -1,10 +1,10 @@
 extends CharacterBody2D
 var Team = "Enemy"
 # "Player", "Enemy", "Ally"
-var Damage = 1
+@export var Damage = 1
 var Speed = Globals.PlayerSpeed + randi_range(-5,5) + 80
 var ExplosionParticles = load("res://ExplosionParticles.tscn")
-var Health = 1
+@export var Health = 1
 var BulletObj = load("res://Bullet.tscn")
 
 var LabelText = load("res://ScoreLabel.tscn")

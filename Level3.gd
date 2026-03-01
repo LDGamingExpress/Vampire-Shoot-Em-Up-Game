@@ -1,25 +1,60 @@
 extends Node2D
-var LevelStageEnemies = [["Centipede",1,1,2.0],
-["FangMK2",3,6,2.0],
-["Skull",1,1,50.0],
-["Asteroid",3,3,50.0],
-["Eye",2,10,1.0],
-["Bat",5,10,1.5],
-["Fang",3,15,3.0],
-["BatL",5,50,1.5],
-["EyeR",2,10,1.0],
-["FangL",3,15,2.0],
-["BatR",5,50,1.5],
-["EyeL",2,10,1.0],
-["FangR",3,15,2.0],
-["Asteroid",10,100,3.0]]
+var LevelStageEnemies = [["Pause",1,1,3.0],
+["Bat",6,18,2.0],
+["Fang",3,6,1.5],
+["BatL",4,4,1.0],
+["FangL",3,3,3.0],
+["BatL",4,4,1.0],
+["FangL",3,3,3.0],
+["BatR",4,4,1.0],
+["FangR",3,3,3.0],
+["Eye",3,3,2.0],
+["FangL",4,4,0.0],
+["FangR",4,4,3.0],
+["Bat",6,6,1.0],
+["Eye",2,2,2.0],
+["Fang",5,5,1.5],
+["BatL",10,10,0.0],
+["FangL",3,3,2.0],
+["Eye",3,6,1.5],
+["BatR",10,10,0.0],
+["FangR",3,3,2.0],
+["Bat",12,12,0.5],
+["Fang",2,2,0.5],
+["FangL",1,1,0.0],
+["FangR",1,1,0.5],
+["Eye",2,2,2.0],
+["Bat",12,12,0.5],
+["Fang",2,2,0.5],
+["FangL",1,1,0.0],
+["FangR",1,1,0.5],
+["Eye",4,4,2.0],
+["FangL",5,15,1.0],
+["FangR",5,15,1.0],
+["EyeL",2,2,1.0],
+["EyeR",2,2,1.0],
+["Bat",12,12,0.5],
+["Fang",2,2,0.5],
+["FangL",1,1,0.0],
+["FangR",1,1,0.5],
+["Eye",2,2,2.0],
+["Bat",12,12,0.5],
+["Fang",2,2,0.5],
+["FangL",1,1,0.0],
+["FangR",1,1,0.5],
+["Eye",4,4,2.0],
+["Skull",1,1,3.0]]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
-var LevelBackground = ["Continental","Arctic","Continental","Desert","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic","Arctic"]
+var LevelBackground = ["Arctic"]
 # Space, Continental, Arctic, Desert
 
-var Dialog = [["HQ","Alright pilot, this is your first mission."],
-["HQ","Take in the sights, and shoot a few asteroids if you see them."],
-["Pause",12]
+var Dialog = [["HQ","Much of the planet has been decimated. Expect heavy resistance."],
+["You","Understood, engaging hostiles."],
+["Pause",40],
+["Death","So, there is still some fight left in these weaklings?"],
+["Death","No matter. I'm sure even a single Skull Destroyer can anihilate such a paltry force."],
+["You","Skull Destroyer? What kind of ship name is that?"],
+["You","Oh..."]
 ]
 
 var DialogStage = 0
@@ -42,7 +77,10 @@ var finishTime := 0.0
 var finishTime2 := 10.0
 var Health = load("res://HealthPickup.tscn")
 
+var Music2Play = "res://Music/Darkness of Space.mp3"
+
 func _ready() -> void:
+	Globals.PlanetType = "Mixed"
 	NextDialog()
 	if LevelBackground[0] == "Space":
 		$TileBackground.visible = false
@@ -58,9 +96,12 @@ func EnemySpawner():
 	if CurrentEnemiesDone >= LevelStageEnemies[Stage][2]:
 		Stage += 1
 		CurrentEnemiesDone = 0
-		Globals.Biome = LevelBackground[Stage]
+		if len(LevelBackground) > Stage:
+			Globals.Biome = LevelBackground[Stage]
 	if Stage < len(LevelStageEnemies):
 		match LevelStageEnemies[Stage][0]:
+			"Pause":
+				CurrentEnemiesDone += 1
 			"Asteroid":
 				for i in range(0,LevelStageEnemies[Stage][1]):
 					CurrentEnemiesDone += 1
@@ -135,6 +176,9 @@ func EnemySpawner():
 					SpawnFangFighterMK2R()
 		await get_tree().create_timer(LevelStageEnemies[Stage][3],false).timeout
 		EnemySpawner()
+	elif $CanvasLayer/GameUI/CompleteLevel.visible == false:
+		await get_tree().create_timer(20,false).timeout
+		$CanvasLayer/GameUI.EndLevel()
 
 func SpawnAsteroid():
 	var newObj = Asteroid.instantiate()
@@ -276,3 +320,8 @@ func NextDialog():
 			$CanvasLayer/GameUI.NewDialog(Dialog[DialogStage][0],Dialog[DialogStage][1])
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
+
+
+func _on_music_player_finished() -> void:
+	$MusicPlayer.stream = load(Music2Play)
+	$MusicPlayer.play()

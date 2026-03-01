@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://twuyqu6hxfwc"]
+
+[ext_resource type="Script" uid="uid://bdxc1rcywumm1" path="res://ZeppelinScript.gd" id="1_q7703"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_2croe"]
+[ext_resource type="PackedScene" uid="uid://bbotfp527uth3" path="res://Turret.tscn" id="3_uotfr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3s5f1"]
+atlas = ExtResource("2_2croe")
+region = Rect2(160, 512, 160, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jauq4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3s5f1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_luidn"]
+radius = 30.265491
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r6jf1"]
+load_path = "res://.godot/imported/FireParticle.png-c6f477c14192667766c9fe5eb3333847.ctex"
+
+[sub_resource type="Gradient" id="Gradient_yd5pt"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s35li"]
+gradient = SubResource("Gradient_yd5pt")
+
+[sub_resource type="Curve" id="Curve_eamjc"]
+_data = [Vector2(0, 1), 0.0, 4.6348324, 0, 0, Vector2(1, 0), -0.30268312, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_il83t"]
+curve = SubResource("Curve_eamjc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6j5b7"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(-1, 0, 0)
+spread = 7.222
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 5, 0)
+scale_curve = SubResource("CurveTexture_il83t")
+color_ramp = SubResource("GradientTexture1D_s35li")
+
+[node name="Zeppelin" type="CharacterBody2D" groups=["Skull"]]
+collision_mask = 0
+script = ExtResource("1_q7703")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jauq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_luidn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(0.88235295, 0.7647059, 0.007843138, 1)
+z_index = 2
+position = Vector2(-9, -27)
+emitting = false
+amount = 15
+texture = SubResource("CompressedTexture2D_r6jf1")
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_6j5b7")
+
+[node name="PointValue" type="HSlider" parent="."]
+visible = false
+offset_right = 8.0
+offset_bottom = 16.0
+max_value = 1500.0
+value = 1500.0
+
+[node name="Turrets" type="Node2D" parent="."]
+
+[node name="Turret" parent="Turrets" instance=ExtResource("3_uotfr")]
+position = Vector2(-10, 0)
+Type = 4
+
+[node name="Turret2" parent="Turrets" instance=ExtResource("3_uotfr")]
+position = Vector2(28, 0)
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+self_modulate = Color(0.88235295, 0.7647059, 0.007843138, 1)
+z_index = 2
+position = Vector2(-9, 27)
+emitting = false
+amount = 15
+texture = SubResource("CompressedTexture2D_r6jf1")
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_6j5b7")

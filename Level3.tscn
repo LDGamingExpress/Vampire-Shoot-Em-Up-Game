@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfk20csxr5uqd"]
+
+[ext_resource type="Script" uid="uid://b85p87d3hrgfa" path="res://Level3.gd" id="1_h8oof"]
+[ext_resource type="Script" uid="uid://c3xso6t37phfm" path="res://DataSaves.gd" id="2_nqeel"]
+[ext_resource type="Script" uid="uid://dywe8c8emboin" path="res://BackgroundObjectsScript.gd" id="3_u5lf4"]
+[ext_resource type="PackedScene" uid="uid://ct6q6e7uaxogj" path="res://player.tscn" id="4_7swbh"]
+[ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="5_ewulq"]
+[ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="6_6vscs"]
+[ext_resource type="AudioStream" uid="uid://c7kuig6wqd3k6" path="res://Music/Darkness of Space.mp3" id="7_h8oof"]
+
+[node name="Level3" type="Node2D"]
+script = ExtResource("1_h8oof")
+
+[node name="SaveSystem" type="Node2D" parent="."]
+script = ExtResource("2_nqeel")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="BackgroundObjects" type="Node2D" parent="."]
+script = ExtResource("3_u5lf4")
+
+[node name="Player" parent="." instance=ExtResource("4_7swbh")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameUI" parent="CanvasLayer" instance=ExtResource("5_ewulq")]
+
+[node name="TileBackground" parent="." instance=ExtResource("6_6vscs")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_h8oof")
+autoplay = true
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

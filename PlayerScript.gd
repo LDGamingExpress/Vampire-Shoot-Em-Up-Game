@@ -61,7 +61,7 @@ func _process(_delta: float) -> void:
 		Reload(20)
 
 func Reload(time : float):
-	await get_tree().create_timer(time).timeout
+	await get_tree().create_timer(time,false).timeout
 	CanShoot = true
 
 func Damaged():

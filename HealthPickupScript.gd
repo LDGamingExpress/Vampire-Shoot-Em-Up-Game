@@ -23,7 +23,7 @@ func onEntered(body: Node2D) -> void:
 		newObj.modulate = Color(0.0, 1.0, 0.0, 1.0)
 		get_parent().add_child(newObj)
 		
-		await get_tree().create_timer(15.0).timeout
+		await get_tree().create_timer(15.0,false).timeout
 		body.Upgrade("None")
 		queue_free()
 

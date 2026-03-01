@@ -24,7 +24,7 @@ func _ready() -> void:
 		1:
 			$Timer.wait_time = 0.8
 			Health = 5
-			$CollisionShape2D.shape.radius = 5.0
+			$CollisionShape2D.shape.radius = 6.0
 			$GunPoints/Node2D2.queue_free()
 			$GunPoints/Node2D3.queue_free()
 			$GunPoints/Node2D4.queue_free()
@@ -34,7 +34,7 @@ func _ready() -> void:
 		2:
 			$Timer.wait_time = 0.8
 			Health = 10
-			$CollisionShape2D.shape.radius = 11.0
+			$CollisionShape2D.shape.radius = 12.0
 			$GunPoints/Node2D.queue_free()
 			$GunPoints/Node2D3.queue_free()
 			$GunPoints/Node2D4.queue_free()
@@ -44,16 +44,16 @@ func _ready() -> void:
 		3:
 			$Timer.wait_time = 1.2
 			Health = 10
-			$CollisionShape2D.shape.radius = 11.0
+			$CollisionShape2D.shape.radius = 12.0
 			$GunPoints/Node2D.queue_free()
 			$GunPoints/Node2D2.queue_free()
 			$GunPoints/Node2D5.queue_free()
 			$GunPoints/Node2D6.queue_free()
 			$GunPoints/Node2D7.queue_free()
 		4:
-			$Timer.wait_time = 0.9
+			$Timer.wait_time = 0.5
 			Health = 10
-			$CollisionShape2D.shape.radius = 11.0
+			$CollisionShape2D.shape.radius = 12.0
 			$GunPoints/Node2D.queue_free()
 			$GunPoints/Node2D2.queue_free()
 			$GunPoints/Node2D3.queue_free()
@@ -89,11 +89,15 @@ func _physics_process(delta: float) -> void:
 				global_rotation = lerpf(global_rotation,NewRotation,RotateBy)
 				#print(NewRotation)
 		4:
-			if global_rotation != rotationDir:
-				var RotateBy = 0.1
-				if rotationDir * global_rotation < 0:
-					RotateBy = -0.1
-				global_rotation = lerpf(global_rotation,rotationDir,RotateBy)
+			#print("n")
+			#print(rotationDir)
+			#print(global_rotation)
+			if abs(global_rotation - (rotationDir + PI/2)) > 0.1:
+				var RotateBy = 0.025
+				if (rotationDir + PI/2) * global_rotation < 0:
+					RotateBy = -0.025
+				global_rotation = lerpf(global_rotation,rotationDir + PI/2,RotateBy)
+				#print(global_rotation)
 			else:
 				rotationDir = rotationDir * -1
 	move_and_slide()

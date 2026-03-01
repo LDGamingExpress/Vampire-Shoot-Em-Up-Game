@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://diirumw5n675"]
+
+[ext_resource type="Script" uid="uid://bqdngjnoecqso" path="res://CentipedeScript.gd" id="1_07m8a"]
+[ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="2_23t17"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2oki4"]
+atlas = ExtResource("2_23t17")
+region = Rect2(480, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2di3x"]
+atlas = ExtResource("2_23t17")
+region = Rect2(512, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niobs"]
+atlas = ExtResource("2_23t17")
+region = Rect2(544, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmg3f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2oki4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2di3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niobs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_luidn"]
+radius = 30.265491
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtmkw"]
+radius = 15.0
+
+[node name="Centipede" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_07m8a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bmg3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_luidn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gtmkw")
+
+[node name="GunPoints" type="Node2D" parent="."]
+
+[node name="PointValue" type="HSlider" parent="."]
+visible = false
+offset_right = 8.0
+offset_bottom = 16.0
+max_value = 500.0
+value = 200.0
+
+[node name="Turrets" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -117,7 +117,7 @@ func _ready() -> void:
 		$BackgroundObjects.queue_free()
 	Globals.Biome = LevelBackground[0]
 	$TileBackground.GenerateNew()
-	await get_tree().create_timer(LevelStageEnemies[0][3]).timeout
+	await get_tree().create_timer(LevelStageEnemies[0][3],false).timeout
 	EnemySpawner()
 
 func EnemySpawner():
@@ -174,10 +174,10 @@ func EnemySpawner():
 				for i in range(0,LevelStageEnemies[Stage][1]):
 					CurrentEnemiesDone += 1
 					SpawnSkull()
-		await get_tree().create_timer(LevelStageEnemies[Stage][3]).timeout
+		await get_tree().create_timer(LevelStageEnemies[Stage][3],false).timeout
 		EnemySpawner()
 	elif $CanvasLayer/GameUI/CompleteLevel.visible == false:
-		await get_tree().create_timer(20).timeout
+		await get_tree().create_timer(20,false).timeout
 		$CanvasLayer/GameUI.EndLevel()
 
 func SpawnAsteroid():
@@ -271,7 +271,7 @@ func NextDialog():
 	if DialogStage < len(Dialog):
 		if Dialog[DialogStage][0] == "Pause":
 			$CanvasLayer/GameUI/DialogPanel.visible = false
-			await get_tree().create_timer(Dialog[DialogStage][1]).timeout
+			await get_tree().create_timer(Dialog[DialogStage][1],false).timeout
 			DialogStage += 1
 			NextDialog()
 		else:
@@ -279,7 +279,7 @@ func NextDialog():
 			$CanvasLayer/GameUI/DialogPanel.visible = true
 			DialogStage += 1
 	if DialogStage == 6:
-		await get_tree().create_timer(5.1).timeout
+		await get_tree().create_timer(5.1,false).timeout
 		MusicChange()
 		for i in range(0,35):
 			var NewObj = Explosion.instantiate()
@@ -288,16 +288,16 @@ func NextDialog():
 			await get_tree().create_timer(randf_range(0.1,0.5)).timeout
 
 func MusicChange():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5,false).timeout
 	Music2Play = "res://Music/Invasion.mp3"
 	Globals.PlanetType = "Dead"
 	var tween = get_tree().create_tween()
 	tween.tween_property($MusicPlayer, "volume_linear", 0.0, 0.8)
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(0.8,false).timeout
 	_on_music_player_finished()
 	var tween2 = get_tree().create_tween()
 	tween2.tween_property($MusicPlayer, "volume_linear", 1.0, 0.8)
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(0.8,false).timeout
 	Music2Play = "res://Music/Fallen Souls.mp3"
 
 func _on_music_player_finished() -> void:
