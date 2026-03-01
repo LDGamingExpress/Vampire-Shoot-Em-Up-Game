@@ -123,6 +123,9 @@ func EnemySpawner():
 					SpawnSkull()
 		await get_tree().create_timer(LevelStageEnemies[Stage][3],false).timeout
 		EnemySpawner()
+	elif $CanvasLayer/GameUI/CompleteLevel.visible == false:
+		await get_tree().create_timer(20,false).timeout
+		$CanvasLayer/GameUI.EndLevel()
 
 func SpawnAsteroid():
 	var newObj = Asteroid.instantiate()

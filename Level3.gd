@@ -8,7 +8,7 @@ var LevelStageEnemies = [["Pause",1,1,3.0],
 ["FangL",3,3,3.0],
 ["BatR",4,4,1.0],
 ["FangR",3,3,3.0],
-["Eye",3,3,2.0],
+["Eye",2,2,2.0],
 ["FangL",4,4,0.0],
 ["FangR",4,4,3.0],
 ["Bat",6,6,1.0],
@@ -16,7 +16,7 @@ var LevelStageEnemies = [["Pause",1,1,3.0],
 ["Fang",5,5,1.5],
 ["BatL",10,10,0.0],
 ["FangL",3,3,2.0],
-["Eye",3,6,1.5],
+["Eye",2,4,1.5],
 ["BatR",10,10,0.0],
 ["FangR",3,3,2.0],
 ["Bat",12,12,0.5],
@@ -28,7 +28,7 @@ var LevelStageEnemies = [["Pause",1,1,3.0],
 ["Fang",2,2,0.5],
 ["FangL",1,1,0.0],
 ["FangR",1,1,0.5],
-["Eye",4,4,2.0],
+["Eye",2,2,2.0],
 ["FangL",5,15,1.0],
 ["FangR",5,15,1.0],
 ["EyeL",2,2,1.0],
@@ -42,19 +42,46 @@ var LevelStageEnemies = [["Pause",1,1,3.0],
 ["Fang",2,2,0.5],
 ["FangL",1,1,0.0],
 ["FangR",1,1,0.5],
-["Eye",4,4,2.0],
-["Skull",1,1,3.0]]
+["Eye",3,3,2.0],
+["Bat",12,12,0.5],
+["Fang",3,3,0.5],
+["Bat",12,12,0.5],
+["Fang",3,3,0.5],
+["FangL",5,5,0.0],
+["FangR",5,5,0.5],
+["Eye",2,2,3.0],
+["BatL",10,10,0.0],
+["FangL",3,3,2.0],
+["Eye",2,4,1.5],
+["BatR",10,10,0.0],
+["FangR",3,3,2.0],
+["Bat",12,36,2.5],
+["Fang",3,9,1.8],
+["Eye",2,4,1.5],
+["Fang",1,2,0.5],
+["FangL",2,2,0.0],
+["FangR",2,2,0.5],
+["Bat",10,30,2.5],
+["Eye",1,2,1.5],
+["Skull",1,1,8.0],
+["Bat",3,12,3.0],
+["Fang",1,4,2.0],
+["Bat",3,15,3.0]
+]
 # Format: ["Enemy Type", Enemies spawned in each wave, total enemies needed, time between waves]
 var LevelBackground = ["Arctic"]
 # Space, Continental, Arctic, Desert
 
 var Dialog = [["HQ","Much of the planet has been decimated. Expect heavy resistance."],
 ["You","Understood, engaging hostiles."],
-["Pause",40],
+["Pause",60],
 ["Death","So, there is still some fight left in these weaklings?"],
 ["Death","No matter. I'm sure even a single Skull Destroyer can anihilate such a paltry force."],
 ["You","Skull Destroyer? What kind of ship name is that?"],
-["You","Oh..."]
+["You","Oh..."],
+["Pause",30],
+["Death","It seems I was mistaken. You won't be so lucky next time, Pilot."],
+["HQ","Excellent work! Reroute for the Rendalan Shipyards!"]
 ]
 
 var DialogStage = 0
@@ -246,7 +273,7 @@ func _process(delta: float) -> void:
 		call_deferred("add_child", newObj)
 		
 		time2 = 0.0
-		finishTime2 = randf_range(80.0, 120.0)
+		finishTime2 = randf_range(40.0, 45.0)
 
 func SpawnFangFighter():
 	var newObj = Fang.instantiate()
