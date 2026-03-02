@@ -116,6 +116,7 @@ func _ready() -> void:
 		$BackgroundObjects.queue_free()
 	Globals.Biome = LevelBackground[0]
 	$TileBackground.GenerateNew()
+	$TileBackground.modulate = Color(0.399, 0.587, 1.0, 1.0)
 	await get_tree().create_timer(LevelStageEnemies[0][3],false).timeout
 	EnemySpawner()
 
