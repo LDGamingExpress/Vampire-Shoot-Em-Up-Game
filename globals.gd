@@ -12,7 +12,7 @@ var PowerUp : String = "None"
 var HighScore := [0, 0, 0, 0, 0, 0, 0, 0]
 var HighScores := [0, 0, 0, 0, 0, 0, 0, 0]
 
-var levels = [preload("res://Level1.tscn"), preload("res://Level2.tscn"), preload("res://Level3.tscn"), preload("res://BossLevel.tscn")]
+var levels = [preload("res://Level1.tscn"), preload("res://Level2.tscn"), preload("res://Level3.tscn"), preload("res://Level4.tscn"), preload("res://BossLevel.tscn")]
 var currentLevel = 0
 
 func LoadLevel():

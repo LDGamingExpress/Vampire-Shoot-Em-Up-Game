@@ -1,7 +1,7 @@
 extends Node2D
 var LevelStageEnemies = [["Centipede",1,1,2.0],
 ["FangMK2",3,6,2.0],
-["Skull",1,1,50.0],
+["Zep",1,1,50.0],
 ["Asteroid",3,3,50.0],
 ["Eye",2,10,1.0],
 ["Bat",5,10,1.5],

@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://c44gqdkoiitlc" path="res://BackgroundBattle.gd" id="4_yqqjl"]
 [ext_resource type="PackedScene" uid="uid://cxncduasan7g5" path="res://MainUI.tscn" id="5_nj7ao"]
 [ext_resource type="PackedScene" uid="uid://cns2nt7qdgb0k" path="res://TileBackground.tscn" id="6_1ug64"]
-[ext_resource type="AudioStream" uid="uid://ctatg7t1cwi5s" path="res://Music/Throbbing Heart.mp3" id="8_yqqjl"]
 [ext_resource type="Texture2D" uid="uid://csti33tsqk44u" path="res://Textures/VampireGameSprites.png" id="9_gkwbp"]
+[ext_resource type="AudioStream" uid="uid://cafuwevqse6db" path="res://Music/Never Ending Suffering.mp3" id="9_yqqjl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nj7ao"]
 atlas = ExtResource("9_gkwbp")
@@ -53,11 +53,13 @@ zoom = Vector2(2, 2)
 script = ExtResource("3_yqqjl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.51718444, 0.5171845, 0.51718444, 1)
 position = Vector2(2, 43)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_1ug64")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.65834004, 0.6583399, 0.6583399, 1)
 position = Vector2(1.0000153, 47)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_cbmc8")
@@ -82,7 +84,7 @@ autostart = true
 [node name="TileBackground" parent="." instance=ExtResource("6_1ug64")]
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_yqqjl")
+stream = ExtResource("9_yqqjl")
 autoplay = true
 
 [connection signal="timeout" from="BackgroundBattle/ShipTimer" to="BackgroundBattle" method="_on_ship_timer_timeout"]
